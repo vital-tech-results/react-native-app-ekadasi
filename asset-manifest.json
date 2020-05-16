@@ -1,0 +1,37 @@
+{
+  "files": {
+    "app.js": "/dominick-designs/react-native-app-ekadasi/static/js/app.fc3fe092.chunk.js",
+    "app.js.map": "/dominick-designs/react-native-app-ekadasi/static/js/app.fc3fe092.chunk.js.map",
+    "runtime~app.js": "/dominick-designs/react-native-app-ekadasi/static/js/runtime~app.4d0f3f97.js",
+    "runtime~app.js.map": "/dominick-designs/react-native-app-ekadasi/static/js/runtime~app.4d0f3f97.js.map",
+    "static/js/2.dfd8cc7c.chunk.js": "/dominick-designs/react-native-app-ekadasi/static/js/2.dfd8cc7c.chunk.js",
+    "static/js/2.dfd8cc7c.chunk.js.map": "/dominick-designs/react-native-app-ekadasi/static/js/2.dfd8cc7c.chunk.js.map",
+    "fonts/AntDesign.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/AntDesign.ttf",
+    "fonts/Entypo.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/Entypo.ttf",
+    "fonts/Feather.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/Feather.ttf",
+    "fonts/FontAwesome.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/FontAwesome.ttf",
+    "fonts/FontAwesome5_Brands.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/FontAwesome5_Brands.ttf",
+    "fonts/FontAwesome5_Solid.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/FontAwesome5_Solid.ttf",
+    "fonts/Foundation.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/Foundation.ttf",
+    "fonts/Ionicons.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/Ionicons.ttf",
+    "fonts/MaterialCommunityIcons.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/MaterialCommunityIcons.ttf",
+    "fonts/MaterialIcons.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/MaterialIcons.ttf",
+    "fonts/SimpleLineIcons.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/SimpleLineIcons.ttf",
+    "fonts/SpaceMono-Regular.ttf": "/dominick-designs/react-native-app-ekadasi/./fonts/SpaceMono-Regular.ttf",
+    "favicon-16.png": "/dominick-designs/react-native-app-ekadasi/favicon-16.png",
+    "favicon-32.png": "/dominick-designs/react-native-app-ekadasi/favicon-32.png",
+    "favicon.ico": "/dominick-designs/react-native-app-ekadasi/favicon.ico",
+    "index.html": "/dominick-designs/react-native-app-ekadasi/index.html",
+    "manifest.json": "/dominick-designs/react-native-app-ekadasi/manifest.json",
+    "serve.json": "/dominick-designs/react-native-app-ekadasi/serve.json",
+    "static/media/bell.png": "/dominick-designs/react-native-app-ekadasi/static/media/bell.a7b9dc9d.png",
+    "static/media/heart.png": "/dominick-designs/react-native-app-ekadasi/static/media/heart.2327736b.png",
+    "static/media/rocket.png": "/dominick-designs/react-native-app-ekadasi/static/media/rocket.51671417.png",
+    "static/media/star.png": "/dominick-designs/react-native-app-ekadasi/static/media/star.004c2bbb.png"
+  },
+  "entrypoints": [
+    "static/js/runtime~app.4d0f3f97.js",
+    "static/js/2.dfd8cc7c.chunk.js",
+    "static/js/app.fc3fe092.chunk.js"
+  ]
+}
