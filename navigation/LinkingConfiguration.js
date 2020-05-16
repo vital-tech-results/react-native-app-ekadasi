@@ -6,8 +6,10 @@ export default {
     Root: {
       path: 'root',
       screens: {
-        Home: 'home',
+        Ekadasi: 'ekadasi',
         Links: 'links',
+        All: 'all',
+
       },
     },
   },

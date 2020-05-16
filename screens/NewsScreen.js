@@ -1,20 +1,23 @@
 import * as WebBrowser from 'expo-web-browser';
-import React, { useState } from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { Card, Divider, Avatar, Button, ListItem, Icon, Overlay } from 'react-native-elements';
+import * as React from 'react';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
+import { Card, Divider, Avatar, ListItem, ListItemProps } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { MonoText } from '../components/StyledText';
+// import { data } from '../components/data/data.json';
+
 // const data = require('../components/data/data.json');
 import * as data from '../components/data/data.json';
 
-export default function HomeScreen() {
 
+
+
+
+export default function NewsScreen() {
   return (
-
     <View style={styles.container}>
       <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
         <View style={styles.welcomeContainer}>
-          <Text>Hare Krsna! See below for the date of the next Ekadasi. NOTE: the name of the Ekadasi is stated after the Date.</Text>
           {/* <Image
             source={
               __DEV__
@@ -25,144 +28,116 @@ export default function HomeScreen() {
           /> */}
         </View>
 
-        <Card
-          title={<TodaysEkadasi />}
-        />
+        {/* style={styles.getStartedContainer} */}
+        <View >
+
+          {/* <DevelopmentModeNotice /> */}
+          {/* <Text>This is a list of all Ekadasis in 2020-2021</Text> */}
+
+          <CalendarData />
 
 
-        <View style={styles.getStartedContainer}>
-          <Text>{<TodaysEkadasi />}</Text>
-          {/* <MonthsEkadasi /> */}
-          {/* <TodaysEkadasi /> */}
-          {/* <DevelopmentModeNotice />        
-          <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
-          <View style={[styles.codeHighlightContainer, styles.homeScreenFilename]}>
-            <MonoText>screens/HomeScreen.js</MonoText>
+          {/* <Text style={styles.getStartedText}>Open up the code for this screen:</Text>
+
+          <View style={[styles.codeHighlightContainer, styles.NewsScreenFilename]}>
+            <MonoText>screens/NewsScreen.js</MonoText>
           </View>
+
           <Text style={styles.getStartedText}>
             This is changed on machine. Change any of the text, save the file, and your app will automatically reload.
           </Text> */}
 
         </View>
+
         {/* <View style={styles.helpContainer}>
           <TouchableOpacity onPress={handleHelpPress} style={styles.helpLink}>
             <Text style={styles.helpLinkText}>Help, it didn’t automatically reload!</Text>
           </TouchableOpacity>
         </View> */}
 
-      </ScrollView >
 
-      <View style={styles.tabBarInfoContainer}>
-        <OverlayNote />
-        {/* <Text style={[styles.codeHighlightContainer]}>NOTE: All dates are for Vrndavana, India. For your local dates tap "Resources" below and tap "Pure Bhakti Calendar." You can configure your local time on Pure Bhatki.</Text> */}
-        {/* <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
+      </ScrollView>
+
+      {/* <View style={styles.tabBarInfoContainer}>
+        <Text style={styles.tabBarInfoText}>This is a tab bar. You can edit it in:</Text>
+
+        <View style={[styles.codeHighlightContainer, styles.navigationFilename]}>
           <MonoText style={styles.codeHighlightText}>navigation/BottomTabNavigator.js</MonoText>
-        </View> */}
-      </View>
+        </View>
+      </View> */}
 
-    </View >
-  );
-
-}
-
-
-function OverlayNote() {
-  const [visible, setVisible] = useState(false);
-
-  const toggleOverlay = () => {
-    setVisible(!visible);
-  };
-
-  return (
-    <View>
-      <Button buttonStyle={[styles.codeHighlightContainer]} title="Tap for important notice..." titleStyle={styles.codeHighlightText} onPress={toggleOverlay} />
-      <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-        <Text>NOTE: All dates are for Vrndavana, India. For your local dates tap "Resources" below and tap "Pure Bhakti Calendar." You can configure your local time on Pure Bhatki.</Text>
-      </Overlay>
     </View>
   );
+}
+
+NewsScreen.navigationOptions = {
+  header: null,
 };
 
 
+// my code testing
+const testOutputInReactElement = () => {
+  return (
+    <View>
+      <Text>this can be in avatar or any react element text value</Text>
+    </View>
+  )
+}
 
-function MonthsEkadasi() {
-  const year = new Date().getFullYear();
-  //January = 0
+function TodaysEkadasi() {
   const month = new Date().getMonth();
-  const dayOfMonth = new Date().getDate();
-  //Sunday is 0, Monday is 1, and so on.
-  const dayOfWeek = new Date().getDay();
   return (
     data.thisYear2020.map((data) => {
       if (data.monthId == month) {
         return (
           <View key={data.monthId}>
-            {/* <Text>{data.monthName}</Text> */}
+            <Text>{data.monthName}</Text>
             <Text>{data.firstEkadasi}</Text>
             <Text>{data.secondEkadasi}</Text>
             <Text>{data.thirdEkadasi}</Text>
-            <Divider style={{ backgroundColor: 'blue' }} />
           </View>
         )
       }
+
     })
   )
 }
-
-
-function TodaysEkadasi() {
-  const year = new Date().getFullYear();
-  //January = 0
-  const month = new Date().getMonth();
-  const dayOfMonth = new Date().getDate();
-  //Sunday is 0, Monday is 1, and so on.
-  const dayOfWeek = new Date().getDay();
+function CalendarData() {
+  let year = new Date().getFullYear();
+  let month = new Date().getMonth();
+  let dayOfMonth = new Date().getDate();
+  const today = ((year) + " " + (month) + " " + (dayOfMonth));
 
   return (
-
     data.thisYear2020.map((data) => {
 
-      // if day of month is greater than today's day of month
-      if (data.monthId == month && data.firstEkadasi.dayInMonth > dayOfMonth) {
-
-        return (
-          <View key={data.monthId}>
-
-
-            <Text style={{ fontSize: 25 }}>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}: {data.firstEkadasi.ekadasiName}</Text>
+      return (
+        <View key={data.monthId}>
+          <Card title={data.monthName} />
+          <View>
+            <ListItem
+              key={data.monthId}
+              leftElement={() =>
+                (<View>
+                  <View>
+                    <Text>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}</Text>
+                    <Divider style={{ backgroundColor: 'blue' }} />
+                    <Text>{data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}</Text>
+                    <Divider style={{ backgroundColor: 'blue' }} />
+                    <Text>{data.thirdEkadasi.dayOfWeek} {data.thirdEkadasi.dayInMonth}</Text>
+                    <Divider style={{ backgroundColor: 'blue' }} />
+                  </View>
+                </View>
+                )}
+            />
           </View>
-        )
-      }
-      // if day of month is greater than today's day of month
-      if (data.monthId == month && data.secondEkadasi.dayInMonth > dayOfMonth) {
-        return (
-          <View key={data.monthId}>
-            {/* <Text>{data.monthName}</Text> */}
-            <Text style={{ fontSize: 25 }}>{data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}: {data.secondEkadasi.ekadasiName}</Text>
-          </View>
-        )
-      }
-
-      if (data.monthId == month && data.thirdEkadasi.dayInMonth > dayOfMonth) {
-        return (
-          <View key={data.monthId}>
-            {/* <Text>{data.monthName}</Text> */}
-            <Text style={{ fontSize: 25 }}>{data.thirdEkadasi.dayOfWeek}, {data.monthName} {data.thirdEkadasi.dayInMonth}: {data.thirdEkadasi.ekadasiName}</Text>
-          </View>
-        )
-      }
-
+          <Divider style={{ backgroundColor: 'blue' }} />
+        </View>
+      )
     })
-
   )
 }
 
-
-
-
-HomeScreen.navigationOptions = {
-  header: null,
-};
 
 function DevelopmentModeNotice() {
   if (__DEV__) {
@@ -199,10 +174,6 @@ function handleHelpPress() {
   );
 }
 
-
-
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -234,7 +205,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 50,
   },
-  homeScreenFilename: {
+  NewsScreenFilename: {
     marginVertical: 7,
   },
   codeHighlightText: {

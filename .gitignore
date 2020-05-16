@@ -9,5 +9,8 @@ npm-debug.*
 *.orig.*
 web-build/
 
+notes.md
+
+/assets/images/ignore-these
 # macOS
 .DS_Store

@@ -1,18 +1,18 @@
 {
   "expo": {
-    "name": "ekadasiApp1",
-    "slug": "ekadasiApp1",
+    "name": "ekadasi",
+    "slug": "ekadasi",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "https://atjvzgrowo.cloudimg.io/v7/cookieless-files.fastsecure.website/ekadasi-app/images/logo/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,7 +23,13 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "com.dominickdesigns.ekadasi",
+      "buildNumber": "0.0.1",
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.dominickdesigns.ekadasi",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

@@ -1,30 +1,34 @@
 import { Ionicons } from '@expo/vector-icons';
 import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, Platform, Linking } from 'react-native';
+import { Button, Overlay } from 'react-native-elements';
 import { RectButton, ScrollView } from 'react-native-gesture-handler';
+
 
 export default function LinksScreen() {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
       <OptionButton
+        icon="md-calendar"
+        label="Pure Bhakti Calendar"
+        onPress={() => WebBrowser.openBrowserAsync('https://www.purebhakti.com/resources/vaisnava-calendar')}
+      />
+
+      <OptionButton
         icon="md-school"
-        label="Read the Expo documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://docs.expo.io')}
+        label="The Loving Reality"
+        onPress={() => WebBrowser.openBrowserAsync('https://kripa.tv/')}
       />
 
       <OptionButton
-        icon="md-compass"
-        label="Read the React Navigation documentation"
-        onPress={() => WebBrowser.openBrowserAsync('https://reactnavigation.org')}
-      />
-
-      <OptionButton
-        icon="ios-chatboxes"
-        label="Ask a question on the forums"
-        onPress={() => WebBrowser.openBrowserAsync('https://forums.expo.io')}
+        icon="ios-help-buoy"
+        label="Contact Support"
+        onPress={() => Linking.openURL('mailto:dominick@dominickdesigns.space?subject=Contacting Ekadasi App Support&body=Hare Krsna! I am contating you from the Ekadasi App.')}
         isLastOption
       />
+
+
     </ScrollView>
   );
 }
@@ -43,6 +47,10 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
     </RectButton>
   );
 }
+
+
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -70,5 +78,30 @@ const styles = StyleSheet.create({
     fontSize: 15,
     alignSelf: 'flex-start',
     marginTop: 1,
+  },
+  tabBarInfoContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: 'black',
+        shadowOffset: { width: 0, height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
+    alignItems: 'center',
+    backgroundColor: '#fbfbfb',
+    paddingVertical: 20,
+  },
+  tabBarInfoText: {
+    fontSize: 17,
+    color: 'rgba(96,100,109, 1)',
+    textAlign: 'center',
   },
 });
