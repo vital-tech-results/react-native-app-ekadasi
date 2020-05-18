@@ -12,5 +12,6 @@ web-build/
 notes.md
 
 /assets/images/ignore-these
+/assets/ignore-files
 # macOS
 .DS_Store
