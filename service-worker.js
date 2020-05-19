@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/dominick-designs/react-native-app-ekadasi/precache-manifest.e62f2f49a1834c45fcb3fd207bdac34c.js"
+  "/react-native-app-ekadasi/precache-manifest.4cc415acdb5379a2907559327f1d5caf.js"
 );
 
 workbox.skipWaiting();
@@ -29,7 +29,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/dominick-designs/react-native-app-ekadasi/index.html", {
+workbox.routing.registerNavigationRoute("/react-native-app-ekadasi/index.html", {
   
   blacklist: [/^\/_/,/\/[^/]+\.[^/]+$/],
 });
