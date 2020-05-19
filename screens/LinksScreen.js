@@ -12,13 +12,13 @@ export default function LinksScreen() {
       <OptionButton
         icon="md-calendar"
         label="Pure Bhakti Calendar"
-        onPress={() => WebBrowser.openBrowserAsync('https://www.purebhakti.com/resources/vaisnava-calendar')}
+        onPress={bhaktiCalendar}
       />
 
       <OptionButton
         icon="md-school"
         label="The Loving Reality"
-        onPress={() => WebBrowser.openBrowserAsync('https://kripa.tv/')}
+        onPress={kripaTv}
       />
 
       <OptionButton
@@ -49,7 +49,13 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
 }
 
 
+function bhaktiCalendar() {
+  WebBrowser.openBrowserAsync('https://www.purebhakti.com/resources/vaisnava-calendar');
+}
 
+function kripaTv() {
+  WebBrowser.openBrowserAsync('https://kripa.tv/');
+}
 
 
 const styles = StyleSheet.create({
