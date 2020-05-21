@@ -1,36 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { Card, Button, Overlay } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as data from '../components/data/data.json';
+import { list2020 } from '../components/data/list.js';
 import { getCurrentFrame } from 'expo/build/AR';
+import { render } from 'react-dom';
 
-export default function HomeScreen() {
+class HomeScreen extends Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+          <View style={styles.welcomeContainer}>
+            <Image
+              source={require('../assets/images/bhaktabhandav.png')}
+              style={styles.welcomeImage}
+            />
+            <Text>Hare Krsna! See below for the date of the next Ekadasi. NOTE: the name of the Ekadasi is stated after the Date.</Text>
+          </View>
 
-  return (
-    <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={require('../assets/images/bhaktabhandav.png')}
-            style={styles.welcomeImage}
+          <Text>
+            It is {new Date().toLocaleTimeString()}
+          </Text>
+          <Card
+            containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
+            title={<TodaysEkadasi />}
           />
-          <Text>Hare Krsna! See below for the date of the next Ekadasi. NOTE: the name of the Ekadasi is stated after the Date.</Text>
+
+          <Card
+            containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
+            title={<TestingMy />}
+          />
+
+
+        </ScrollView >
+
+        <View style={styles.tabBarInfoContainer}>
+          <OverlayNote />
         </View>
-
-        <Card
-          containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
-          title={<TodaysEkadasi />}
-        />
-
-      </ScrollView >
-
-      <View style={styles.tabBarInfoContainer}>
-        <OverlayNote />
-      </View>
-    </View >
-  );
+      </View >
+    );
+  }
 }
+
+
 
 function OverlayNote() {
   const [visible, setVisible] = useState(false);
@@ -52,9 +66,37 @@ function OverlayNote() {
   );
 };
 
+
+function TestingMy() {
+
+  const getCurrentMonth = new Date().getMonth();
+  let plusOne = getCurrentMonth + 1
+
+  let currentMonthIndex = list2020.findIndex((list2020) => list2020.monthId == getCurrentMonth);
+  let nextMonthIndex = currentMonthIndex + 1;
+  console.log(typeof nextMonthIndex)
+  console.log(typeof currentMonthIndex)
+  return (
+    list2020.find((list, index, array) => {
+      if (list.thirdEkadasi.dayOfWeek == undefined) {
+        return (
+          <View key={index}>
+            <Text style={styles.displayEkadasi}>sadfasd</Text>
+          </View>
+        )
+      }
+
+    })
+  )
+}
+
+
+
+
 function TodaysEkadasi() {
   const month = new Date().getMonth();
   const dayOfMonth = new Date().getDate();
+
   return (
 
     data.thisYear2020.map((data) => {
@@ -82,8 +124,6 @@ function TodaysEkadasi() {
       }
 
 
-
-
       if (data.monthId == month && data.firstEkadasi.dayInMonth == dayOfMonth) {
         return (
           <View key={data.monthId}>
@@ -108,11 +148,11 @@ function TodaysEkadasi() {
       }
 
 
-
     })
-
   )
 }
+
+
 
 HomeScreen.navigationOptions = {
   header: null,
@@ -213,3 +253,5 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
   },
 });
+
+export default HomeScreen
