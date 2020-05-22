@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { Image, Platform, StyleSheet, Text, View } from 'react-native';
 import { Card, Button, Overlay } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -20,9 +20,7 @@ class HomeScreen extends Component {
             <Text>Hare Krsna! See below for the date of the next Ekadasi. NOTE: the name of the Ekadasi is stated after the Date.</Text>
           </View>
 
-          <Text>
-            It is {new Date().toLocaleTimeString()}
-          </Text>
+
           <Card
             containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
             title={<TodaysEkadasi />}
@@ -69,45 +67,52 @@ function OverlayNote() {
 
 function TestingMy() {
 
-  const getCurrentMonth = new Date().getMonth();
-  let plusOne = getCurrentMonth + 1
-
-  let currentMonthIndex = list2020.findIndex((list2020) => list2020.monthId == getCurrentMonth);
+  const month = new Date().getMonth();
+  const dayOfMonth = new Date().getDate();
+  let [thisMonth, displayNextMonth] = useState(month);
+  let plusOne = month + 1
   let nextMonthIndex = currentMonthIndex + 1;
-  console.log(typeof nextMonthIndex)
-  console.log(typeof currentMonthIndex)
+  let currentMonthIndex = list2020.findIndex((list2020) => list2020.monthId == month);
+  const newList2020 = list2020.map((item) => ({ monthId: item.monthId, monthName: item.monthName }))
+
+
+  const mylist = list2020.find(function listItems(element, index) {
+    return element.monthId == month + 1
+  })
   return (
-    list2020.find((list, index, array) => {
-      if (list.thirdEkadasi.dayOfWeek == undefined) {
+    list2020.map((data) => {
+      if ((data.monthId == month) && (data.thirdEkadasi.dayInMonth == undefined)) {
         return (
-          <View key={index}>
-            <Text style={styles.displayEkadasi}>sadfasd</Text>
+          <View>
+            <Text>{mylist.monthName}</Text>
           </View>
         )
       }
-
     })
+
   )
 }
-
-
 
 
 function TodaysEkadasi() {
   const month = new Date().getMonth();
   const dayOfMonth = new Date().getDate();
+  const mylist = list2020.find(function listItems(element, index) {
+    return element.monthId == month + 1
+  })
 
   return (
-
     data.thisYear2020.map((data) => {
-      if (data.monthId == month && data.firstEkadasi.dayInMonth > dayOfMonth) {
+
+      if (data.monthId == month && data.firstEkadasi.dayInMonth >= dayOfMonth) {
         return (
           <View key={data.monthId}>
             <Text style={styles.displayEkadasi}>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}:{data.firstEkadasi.ekadasiName}</Text>
           </View>
         )
       }
-      if (data.monthId == month && data.secondEkadasi.dayInMonth > dayOfMonth) {
+
+      if (data.monthId == month && data.secondEkadasi.dayInMonth >= dayOfMonth) {
         return (
           <View key={data.monthId}>
             <Text style={styles.displayEkadasi}>{data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}: {data.secondEkadasi.ekadasiName}</Text>
@@ -115,39 +120,29 @@ function TodaysEkadasi() {
         )
       }
 
-      if (data.monthId == month && data.thirdEkadasi.dayInMonth > dayOfMonth) {
+      if (data.monthId == month && data.thirdEkadasi.dayInMonth >= dayOfMonth) {
         return (
           <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>{data.thirdEkadasi.dayOfWeek}, {data.monthName} {data.thirdEkadasi.dayInMonth}: {data.thirdEkadasi.ekadasiName}</Text>
+            <Text style={styles.displayEkadasi}>
+
+              {data.thirdEkadasi.dayOfWeek}, {data.monthName} {data.thirdEkadasi.dayInMonth}: {data.thirdEkadasi.ekadasiName}
+
+            </Text>
           </View>
         )
       }
 
-
-      if (data.monthId == month && data.firstEkadasi.dayInMonth == dayOfMonth) {
+      if ((data.monthId == month) && (data.thirdEkadasi.dayInMonth == undefined)) {
         return (
           <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}:{data.firstEkadasi.ekadasiName}</Text>
+            <Text style={styles.displayEkadasi}>
+              {mylist.firstEkadasi.dayOfWeek}, {mylist.monthName} {mylist.firstEkadasi.dayInMonth}: {mylist.firstEkadasi.ekadasiName}
+            </Text>
           </View>
+
         )
       }
-      if (data.monthId == month && data.secondEkadasi.dayInMonth == dayOfMonth) {
-        return (
-          <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>Today is Ekadasi! {data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}: {data.secondEkadasi.ekadasiName} </Text>
-          </View>
-        )
-      }
-
-      if (data.monthId == month && data.thirdEkadasi.dayInMonth == dayOfMonth) {
-        return (
-          <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>{data.thirdEkadasi.dayOfWeek}, {data.monthName} {data.thirdEkadasi.dayInMonth}: {data.thirdEkadasi.ekadasiName}</Text>
-          </View>
-        )
-      }
-
-
+      
     })
   )
 }
