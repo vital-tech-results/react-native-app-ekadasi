@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/react-native-app-ekadasi/static/js/app.62b8825c.chunk.js",
-    "app.js.map": "/react-native-app-ekadasi/static/js/app.62b8825c.chunk.js.map",
+    "app.js": "/react-native-app-ekadasi/static/js/app.39517df1.chunk.js",
+    "app.js.map": "/react-native-app-ekadasi/static/js/app.39517df1.chunk.js.map",
     "runtime~app.js": "/react-native-app-ekadasi/static/js/runtime~app.dcf725ff.js",
     "runtime~app.js.map": "/react-native-app-ekadasi/static/js/runtime~app.dcf725ff.js.map",
-    "static/js/2.50a34326.chunk.js": "/react-native-app-ekadasi/static/js/2.50a34326.chunk.js",
-    "static/js/2.50a34326.chunk.js.map": "/react-native-app-ekadasi/static/js/2.50a34326.chunk.js.map",
+    "static/js/2.4f79e42c.chunk.js": "/react-native-app-ekadasi/static/js/2.4f79e42c.chunk.js",
+    "static/js/2.4f79e42c.chunk.js.map": "/react-native-app-ekadasi/static/js/2.4f79e42c.chunk.js.map",
     "fonts/AntDesign.ttf": "/react-native-app-ekadasi/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/react-native-app-ekadasi/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/react-native-app-ekadasi/./fonts/Feather.ttf",
@@ -32,7 +32,7 @@
   },
   "entrypoints": [
     "static/js/runtime~app.dcf725ff.js",
-    "static/js/2.50a34326.chunk.js",
-    "static/js/app.62b8825c.chunk.js"
+    "static/js/2.4f79e42c.chunk.js",
+    "static/js/app.39517df1.chunk.js"
   ]
 }

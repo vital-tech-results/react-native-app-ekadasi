@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "revision": "6f70e5e335cbf73f154a",
-    "url": "/react-native-app-ekadasi/static/js/app.62b8825c.chunk.js"
+    "revision": "83530466b8cbc92a1d4b",
+    "url": "/react-native-app-ekadasi/static/js/app.39517df1.chunk.js"
   },
   {
     "revision": "ecb0caa27d26ee20522d",
     "url": "/react-native-app-ekadasi/static/js/runtime~app.dcf725ff.js"
   },
   {
-    "revision": "85925dacbeee0f969ca1",
-    "url": "/react-native-app-ekadasi/static/js/2.50a34326.chunk.js"
+    "revision": "cbef39b1d92f935a9546",
+    "url": "/react-native-app-ekadasi/static/js/2.4f79e42c.chunk.js"
   },
   {
     "revision": "004c2bbb035d8d06bb830efc4673c886",
@@ -100,7 +100,7 @@ self.__precacheManifest = [
     "url": "/react-native-app-ekadasi/favicon.ico"
   },
   {
-    "revision": "9662bbbfcb7c8fef0cc4a46ec8fc14c5",
+    "revision": "21b099f00428ea1214e135f7433a7235",
     "url": "/react-native-app-ekadasi/index.html"
   },
   {
