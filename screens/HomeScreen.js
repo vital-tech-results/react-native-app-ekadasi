@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from 'react';
-import { Image, Platform, StyleSheet, Text, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, View, Vibration } from 'react-native';
 import { Card, Button, Overlay } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import * as data from '../components/data/data.json';
@@ -7,11 +7,195 @@ import { list2020 } from '../components/data/list.js';
 import { getCurrentFrame } from 'expo/build/AR';
 import { render } from 'react-dom';
 
-class HomeScreen extends Component {
+
+
+
+
+
+
+
+
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
+import Constants from 'expo-constants';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export default class HomeScreen extends Component {
+
+
+
+
+
+
+
+
+
+  state = {
+    expoPushToken: '',
+    notification: {},
+  };
+
+  registerForPushNotificationsAsync = async () => {
+    if (Constants.isDevice) {
+      const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+      let finalStatus = existingStatus;
+      if (existingStatus !== 'granted') {
+        const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+        finalStatus = status;
+      }
+      if (finalStatus !== 'granted') {
+        alert('Failed to get push token for push notification!');
+        return;
+      }
+      token = await Notifications.getExpoPushTokenAsync();
+      console.log(token);
+      this.setState({ expoPushToken: token });
+    } else {
+      alert('Must use physical device for Push Notifications');
+    }
+
+    if (Platform.OS === 'android') {
+      Notifications.createChannelAndroidAsync('default', {
+        name: 'default',
+        sound: true,
+        priority: 'max',
+        vibrate: [0, 250, 250, 250],
+      });
+    }
+  };
+
+  componentDidMount() {
+    this.registerForPushNotificationsAsync();
+
+    // Handle notifications that are received or selected while the app
+    // is open. If the app was closed and then opened by tapping the
+    // notification (rather than just tapping the app icon to open it),
+    // this function will fire on the next tick after the app starts
+    // with the notification data.
+    this._notificationSubscription = Notifications.addListener(this._handleNotification);
+  }
+
+  _handleNotification = notification => {
+    Vibration.vibrate();
+    console.log(notification);
+    this.setState({ notification: notification });
+  };
+
+  // Can use this function below, OR use Expo's Push Notification Tool-> https://expo.io/dashboard/notifications
+
+
+  sendPushNotification = async () => {
+    const message = {
+      to: this.state.expoPushToken,
+      sound: 'default',
+      title: 'Original Title',
+      body: 'And here is the body!',
+      data: { data: 'goes here' },
+      _displayInForeground: true,
+    };
+    const response = await fetch('https://exp.host/--/api/v2/push/send', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Accept-encoding': 'gzip, deflate',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(message),
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   render() {
     return (
       <View style={styles.container}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+
+
+
+
+
+
+
+
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'space-around',
+            }}>
+            <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <Text>Origin: {this.state.notification.origin}</Text>
+              <Text>Data: {JSON.stringify(this.state.notification.data)}</Text>
+            </View>
+            <Button title={'Press to Send Notification'} onPress={() => this.sendPushNotification()} />
+          </View>
+
+
+
+
+
+
+
+
+
           <View style={styles.welcomeContainer}>
             <Image
               source={require('../assets/images/bhaktabhandav.png')}
@@ -26,10 +210,7 @@ class HomeScreen extends Component {
             title={<TodaysEkadasi />}
           />
 
-          <Card
-            containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
-            title={<TestingMy />}
-          />
+
 
 
         </ScrollView >
@@ -41,7 +222,6 @@ class HomeScreen extends Component {
     );
   }
 }
-
 
 
 function OverlayNote() {
@@ -65,39 +245,14 @@ function OverlayNote() {
 };
 
 
-function TestingMy() {
-
-  const month = new Date().getMonth();
-  const dayOfMonth = new Date().getDate();
-  let [thisMonth, displayNextMonth] = useState(month);
-  let plusOne = month + 1
-  let nextMonthIndex = currentMonthIndex + 1;
-  let currentMonthIndex = list2020.findIndex((list2020) => list2020.monthId == month);
-  const newList2020 = list2020.map((item) => ({ monthId: item.monthId, monthName: item.monthName }))
-
-
-  const mylist = list2020.find(function listItems(element, index) {
-    return element.monthId == month + 1
-  })
-  return (
-    list2020.map((data) => {
-      if ((data.monthId == month) && (data.thirdEkadasi.dayInMonth == undefined)) {
-        return (
-          <View>
-            <Text>{mylist.monthName}</Text>
-          </View>
-        )
-      }
-    })
-
-  )
-}
 
 
 function TodaysEkadasi() {
+
+
   const month = new Date().getMonth();
   const dayOfMonth = new Date().getDate();
-  const mylist = list2020.find(function listItems(element, index) {
+  const findNextMonth = data.thisYear2020.find((element) => {
     return element.monthId == month + 1
   })
 
@@ -136,13 +291,16 @@ function TodaysEkadasi() {
         return (
           <View key={data.monthId}>
             <Text style={styles.displayEkadasi}>
-              {mylist.firstEkadasi.dayOfWeek}, {mylist.monthName} {mylist.firstEkadasi.dayInMonth}: {mylist.firstEkadasi.ekadasiName}
+              {findNextMonth.firstEkadasi.dayOfWeek}, {findNextMonth.monthName} {findNextMonth.firstEkadasi.dayInMonth}: {findNextMonth.firstEkadasi.ekadasiName}
+
+
+
             </Text>
           </View>
 
         )
       }
-      
+
     })
   )
 }
@@ -249,4 +407,5 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen
+
+
