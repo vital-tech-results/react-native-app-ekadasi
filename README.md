@@ -7,9 +7,13 @@ I've always wanted to use an Ekadasi app. I've never seen one available (let me 
 
 This is app is made with love for a non-profit program that selflessly serves thousands of people daily. This is my attempt to give back to the community. 
 
+
+## Homepage for the app
+View the home landing page for this app here: https://dominickdesigns.space/ekadasi-app/
+
 ## Resources
 
-This app uses the official [Pure Bhakti Calendar](http://www.purebhakti.com/resources/vaisnava-calendar) for dates in Vrndavana, India. For more details on Ekadasi [see Kripa.tv](https://kripa.tv/?s=ekadasi)
+This app uses the official [Pure Bhakti Calendar](http://www.purebhakti.com/resources/vaisnava-calendar) for dates in Vrndavana, India. For more details on Ekadasi [see Kripa.tv](https://kripa.tv/?s=ekadasi) & [Bhakta.org](https://bhakta.org/)
 
 ## What's inside
 This app was created using [React Native Expo](https://docs.expo.io/)
