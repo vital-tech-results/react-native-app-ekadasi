@@ -31,24 +31,9 @@ NewsScreen.navigationOptions = {
 };
 
 
-function TodaysEkadasi() {
-  const month = new Date().getMonth();
-  return (
-    data.thisYear2020.map((data) => {
-      if (data.monthId == month) {
-        return (
-          <View key={data.monthId}>
-            <Text>{data.monthName}</Text>
-            <Text>{data.firstEkadasi}</Text>
-            <Text>{data.secondEkadasi}</Text>
-            <Text>{data.thirdEkadasi}</Text>
-          </View>
-        )
-      }
 
-    })
-  )
-}
+
+
 function CalendarData() {
   let year = new Date().getFullYear();
   let month = new Date().getMonth();

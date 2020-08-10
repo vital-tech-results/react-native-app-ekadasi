@@ -17,7 +17,7 @@ export default function LinksScreen() {
 
       <OptionButton
         icon="md-school"
-        label="The Loving Reality"
+        label="Ekadasi Reading Material"
         onPress={kripaTv}
       />
 
@@ -27,6 +27,8 @@ export default function LinksScreen() {
         onPress={() => Linking.openURL('mailto:dominick@dominickdesigns.space?subject=Contacting Ekadasi App Support&body=Hare Krsna! I am contating you from the Ekadasi App.')}
         isLastOption
       />
+
+
 
 
     </ScrollView>
@@ -54,8 +56,10 @@ function bhaktiCalendar() {
 }
 
 function kripaTv() {
-  WebBrowser.openBrowserAsync('https://kripa.tv/');
+  WebBrowser.openBrowserAsync('https://bhakta.org/tag/ekadasi/');
 }
+
+
 
 
 const styles = StyleSheet.create({
