@@ -1,9 +1,8 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { useState, Component } from 'react';
 import { Image, Platform, StyleSheet, Text, View, Vibration } from 'react-native';
 import { Card, Button, Overlay } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { thisYear2020 } from '../components/data/data-array'
-
 
 
 export default class HomeScreen extends Component {
@@ -40,9 +39,10 @@ export default class HomeScreen extends Component {
 
         }
 
-
       })
-    );
+
+    )
+
   }
 
 
@@ -67,9 +67,6 @@ export default class HomeScreen extends Component {
     );
 
   }
-
-
-
 
 
   render() {
