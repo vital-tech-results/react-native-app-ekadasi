@@ -2,15 +2,47 @@ import React, { useState, useEffect, Component } from 'react';
 import { Image, Platform, StyleSheet, Text, View, Vibration } from 'react-native';
 import { Card, Button, Overlay } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as data from '../components/data/data.json';
-import { render } from 'react-dom';
+import { thisYear2020 } from '../components/data/data-array'
 
 
 
 export default class HomeScreen extends Component {
 
-  state = {
-    todayIsEkadasi: "tytqqq",
+  GetAll = () => {
+    const month = new Date().getMonth();
+    const dayOfMonth = new Date().getDate();
+
+    return (
+      thisYear2020.map(data => {
+        if (data.monthId == month && data.dayInMonth > dayOfMonth) {
+          return (
+            <View key={data.monthId} >
+              <Text style={styles.displayEkadasi}>
+                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
+              </Text>
+            </View>
+          )
+        }
+
+        if (data.monthId == month && data.dayInMonth == dayOfMonth) {
+          return (
+            <View key={data.monthId} >
+              <Card
+                containerStyle={{ backgroundColor: "#15c240" }}
+                titleStyle={{ color: 'white', fontSize: 40 }}
+                title="Today is Ekadasi"
+              />
+              <Text style={styles.displayEkadasi}>
+                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
+              </Text>
+            </View>
+          )
+
+        }
+
+
+      })
+    );
   }
 
 
@@ -33,13 +65,17 @@ export default class HomeScreen extends Component {
 
       </View>
     );
-  };
+
+  }
+
+
 
 
 
   render() {
+
     return (
-      <View style={styles.container}>
+      < View style={styles.container} >
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
           <View style={styles.welcomeContainer}>
@@ -48,12 +84,14 @@ export default class HomeScreen extends Component {
               style={styles.welcomeImage}
             />
             <Text>Hare Krsna! See below for the date of the next Ekadasi. NOTE: the name of the Ekadasi is stated after the Date. </Text>
+
+
           </View>
 
 
           <Card
             containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
-            title={<TodaysEkadasi />}
+            title={<this.GetAll />}
           />
 
         </ScrollView >
@@ -67,108 +105,6 @@ export default class HomeScreen extends Component {
   }
 }
 
-
-
-
-
-
-
-function TodaysEkadasi() {
-  const month = new Date().getMonth();
-  const dayOfMonth = new Date().getDate();
-  const findNextMonth = data.thisYear2020.find((element) => {
-    return element.monthId == month + 1
-  })
-
-  return (
-
-    data.thisYear2020.map((data) => {
-
-      if (data.firstEkadasi.dayInMonth == dayOfMonth && data.monthId == month) {
-
-        return (
-          < View key={data.monthId} >
-            <Card
-              containerStyle={{ backgroundColor: "#15c240" }}
-              titleStyle={{ color: 'white', fontSize: 40 }}
-              title="today is Ekadasi"
-            />
-            <Text style={styles.displayEkadasi}>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}:{data.firstEkadasi.ekadasiName}</Text>
-          </View >
-        )
-      }
-      if (data.secondEkadasi.dayInMonth == dayOfMonth && data.monthId == month) {
-
-        return (
-          < View key={data.monthId} >
-            <Card
-              containerStyle={{ backgroundColor: "#15c240" }}
-              titleStyle={{ color: 'white', fontSize: 40 }}
-              title="today is Ekadasi"
-            />
-            <Text style={styles.displayEkadasi}>{data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}:{data.secondEkadasi.ekadasiName}</Text>
-          </View >
-        )
-      }
-      if (data.thirdEkadasi.dayInMonth == dayOfMonth && data.monthId == month) {
-
-        return (
-          < View key={data.monthId} >
-            <Card
-              containerStyle={{ backgroundColor: "#15c240" }}
-              titleStyle={{ color: 'white', fontSize: 40 }}
-              title="today is Ekadasi"
-            />
-            <Text style={styles.displayEkadasi}>{data.thirdEkadasi.dayOfWeek}, {data.monthName} {data.thirdEkadasi.dayInMonth}:{data.thirdEkadasi.ekadasiName}</Text>
-          </View >
-        )
-      }
-
-      if (data.monthId == month && data.firstEkadasi.dayInMonth >= dayOfMonth) {
-        return (
-          <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}:{data.firstEkadasi.ekadasiName}</Text>
-          </View>
-        )
-      }
-
-
-      if (data.monthId == month && data.secondEkadasi.dayInMonth >= dayOfMonth) {
-        return (
-          <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>
-              {data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}: {data.secondEkadasi.ekadasiName}
-            </Text>
-          </View>
-        )
-      }
-
-      if (data.monthId == month && data.thirdEkadasi.dayInMonth >= dayOfMonth) {
-        return (
-          <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>
-              {data.thirdEkadasi.dayOfWeek}, {data.monthName} {data.thirdEkadasi.dayInMonth}: {data.thirdEkadasi.ekadasiName}
-            </Text>
-          </View>
-        )
-      }
-
-
-
-      if ((data.monthId == month) && (data.thirdEkadasi.dayInMonth == undefined)) {
-        return (
-          <View key={data.monthId}>
-            <Text style={styles.displayEkadasi}>
-              {findNextMonth.firstEkadasi.dayOfWeek}, {findNextMonth.monthName} {findNextMonth.firstEkadasi.dayInMonth}: {findNextMonth.firstEkadasi.ekadasiName}
-            </Text>
-          </View>
-
-        )
-      }
-
-    })
-  )
-};
 
 
 

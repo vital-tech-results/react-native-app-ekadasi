@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, View, Button } from 'react-native';
 import { Card, Divider, ListItem } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as data from '../components/data/data.json';
+import * as data from '../components/data/data';
 
 export default function NewsScreen() {
   return (

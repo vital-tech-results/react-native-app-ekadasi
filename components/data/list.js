@@ -1,13 +1,13 @@
 const list2020 = [
 
     {
-        "monthId": "4",
+        "monthId": "8",
         "monthName": "May",
 
         "firstEkadasi": {
             "jsDayOfWeek": "1",
             "dayOfWeek": "Monday",
-            "dayInMonth": "4",
+            "dayInMonth": "15",
             "ekadasiName": "Mohini"
         },
         "secondEkadasi": {
@@ -41,4 +41,17 @@ const list2020 = [
 
 ];
 
-export { list2020 };
+
+
+function mappingOver() {
+
+
+    const month = new Date().getMonth();
+    const dayOfMonth = new Date().getDate();
+    const findNextMonth = data.thisYear2020.find((element) => {
+        return element.monthId == month + 1
+    })
+
+    return month
+
+}
