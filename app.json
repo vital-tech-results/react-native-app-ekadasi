@@ -26,10 +26,13 @@
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
       "buildNumber": "0.0.2",
       "supportsTablet": true
+
     },
     "android": {
       "package": "com.dominickdesigns.ekadasi",
       "versionCode": 3
+
+
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

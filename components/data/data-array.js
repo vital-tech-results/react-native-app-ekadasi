@@ -80,14 +80,16 @@ export const thisYear2020 = [
 
 
 
+
     {
         "monthName": "September",
-        "dayInMonth": "13",
+        "dayInMonth": "6",
         "dayOfWeek": "Sunday",
         "ekadasiName": "Indira",
         "jsDayOfWeek": "0",
         "monthId": "8",
     },
+
     {
         "monthName": "September",
         "dayInMonth": "27",

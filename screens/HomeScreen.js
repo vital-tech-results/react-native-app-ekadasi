@@ -5,6 +5,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { thisYear2020 } from '../components/data/data-array'
 
 
+
 export default class HomeScreen extends Component {
 
   GetAll = () => {
@@ -12,23 +13,17 @@ export default class HomeScreen extends Component {
     const dayOfMonth = new Date().getDate();
 
     return (
-      thisYear2020.map(data => {
-        if (data.monthId == month && data.dayInMonth > dayOfMonth) {
-          return (
-            <View key={data.monthId} >
-              <Text style={styles.displayEkadasi}>
-                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
-              </Text>
-            </View>
-          )
-        }
 
-        if (data.monthId == month && data.dayInMonth == dayOfMonth) {
+      thisYear2020.filter(data => Number(data.monthId) === month && data.dayInMonth >= dayOfMonth).map((data, index) => {
+        if ((Number(data.monthId) === month && data.dayInMonth == dayOfMonth)) {
           return (
-            <View key={data.monthId} >
+
+
+
+            <View key={index} >
               <Card
-                containerStyle={{ backgroundColor: "#15c240" }}
-                titleStyle={{ color: 'white', fontSize: 40 }}
+                containerStyle={{ backgroundColor: "#15c240", marginBottom: "10%" }}
+                titleStyle={{ color: 'white', fontSize: 30 }}
                 title="Today is Ekadasi"
               />
               <Text style={styles.displayEkadasi}>
@@ -39,10 +34,23 @@ export default class HomeScreen extends Component {
 
         }
 
+        if ((Number(data.monthId) === month && data.dayInMonth > dayOfMonth) && index == 0) {
+          return (
+            <View key={index} >
+              <Text style={styles.displayEkadasi}>
+                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
+              </Text>
+            </View>
+          )
+        }
+
       })
 
-    )
 
+
+
+
+    )
   }
 
 
@@ -80,9 +88,6 @@ export default class HomeScreen extends Component {
               source={require('../assets/images/bhaktabhandav.png')}
               style={styles.welcomeImage}
             />
-            <Text>Hare Krsna! See below for the date of the next Ekadasi. NOTE: the name of the Ekadasi is stated after the Date. </Text>
-
-
           </View>
 
 
@@ -90,6 +95,7 @@ export default class HomeScreen extends Component {
             containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
             title={<this.GetAll />}
           />
+
 
         </ScrollView >
 
