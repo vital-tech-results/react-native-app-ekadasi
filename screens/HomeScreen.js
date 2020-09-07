@@ -6,24 +6,29 @@ import { thisYear2020 } from '../components/data/data-array'
 
 
 
-export default class HomeScreen extends Component {
 
+
+
+
+
+export default class HomeScreen extends Component {
   GetAll = () => {
     const month = new Date().getMonth();
     const dayOfMonth = new Date().getDate();
 
     return (
-
       thisYear2020.filter(data => Number(data.monthId) === month && data.dayInMonth >= dayOfMonth).map((data, index) => {
-        if ((Number(data.monthId) === month && data.dayInMonth == dayOfMonth)) {
+
+        const monthIdEqualsMonth = Number(data.monthId) === month;
+        const dataDayInMonth = Number(data.dayInMonth);
+
+        if (monthIdEqualsMonth && dataDayInMonth === dayOfMonth) {
           return (
-
-
-
             <View key={index} >
-              <Card
-                containerStyle={{ backgroundColor: "#15c240", marginBottom: "10%" }}
-                titleStyle={{ color: 'white', fontSize: 30 }}
+              <Button
+                buttonStyle={{ backgroundColor: "#15c240" }}
+                containerStyle={{ marginBottom: 20 }}
+                titleStyle={{ color: 'white', fontSize: 30, marginBottom: 10 }}
                 title="Today is Ekadasi"
               />
               <Text style={styles.displayEkadasi}>
@@ -34,7 +39,7 @@ export default class HomeScreen extends Component {
 
         }
 
-        if ((Number(data.monthId) === month && data.dayInMonth > dayOfMonth) && index == 0) {
+        if ((monthIdEqualsMonth && dataDayInMonth > dayOfMonth) && index === 0) {
           return (
             <View key={index} >
               <Text style={styles.displayEkadasi}>
@@ -45,9 +50,6 @@ export default class HomeScreen extends Component {
         }
 
       })
-
-
-
 
 
     )
@@ -95,7 +97,6 @@ export default class HomeScreen extends Component {
             containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
             title={<this.GetAll />}
           />
-
 
         </ScrollView >
 
@@ -147,6 +148,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20
   },
+
   welcomeImage: {
     width: 100,
     height: 80,

@@ -83,7 +83,7 @@ export const thisYear2020 = [
 
     {
         "monthName": "September",
-        "dayInMonth": "6",
+        "dayInMonth": "13",
         "dayOfWeek": "Sunday",
         "ekadasiName": "Indira",
         "jsDayOfWeek": "0",
