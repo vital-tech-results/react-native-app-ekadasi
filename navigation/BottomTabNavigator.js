@@ -51,7 +51,7 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case 'Ekadasi':
-      return 'The next Ekadasi is...';
+      return 'Ekadasi is the mother of Bhakti';
     case 'Resources':
       return 'Bhakti Resources';
     case 'All':

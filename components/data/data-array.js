@@ -79,8 +79,6 @@ export const thisYear2020 = [
     },
 
 
-
-
     {
         "monthName": "September",
         "dayInMonth": "13",
@@ -89,7 +87,6 @@ export const thisYear2020 = [
         "jsDayOfWeek": "0",
         "monthId": "8",
     },
-
     {
         "monthName": "September",
         "dayInMonth": "27",
@@ -98,7 +95,6 @@ export const thisYear2020 = [
         "jsDayOfWeek": "0",
         "monthId": "8",
     },
-
 
 
 

@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "0.0.2",
+    "version": "0.0.5",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -24,13 +24,13 @@
     ],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.2",
+      "buildNumber": "0.0.3",
       "supportsTablet": true
 
     },
     "android": {
       "package": "com.dominickdesigns.ekadasi",
-      "versionCode": 3
+      "versionCode": 5
 
 
     },

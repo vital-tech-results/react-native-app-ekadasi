@@ -1,20 +1,60 @@
-import React, { useState, Component } from 'react';
+import React, { useState, Component, useEffect, useRef } from 'react';
 import { Image, Platform, StyleSheet, Text, View, Vibration } from 'react-native';
 import { Card, Button, Overlay } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
 import { thisYear2020 } from '../components/data/data-array'
+import Constants from 'expo-constants';
+import * as Notifications from 'expo-notifications';
+import * as Permissions from 'expo-permissions';
 
 
 
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: false,
+  }),
+});
 
 
 
+function LocalNotifs() {
+
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState(false);
+  const notificationListener = useRef();
+  const responseListener = useRef();
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+
+    });
+
+    return () => {
+      Notifications.removeNotificationSubscription(notificationListener);
+      Notifications.removeNotificationSubscription(responseListener);
+    };
+  }, []);
+
+  return (null)
+
+}
 
 
 export default class HomeScreen extends Component {
+
   GetAll = () => {
     const month = new Date().getMonth();
     const dayOfMonth = new Date().getDate();
+    const dayOfMonthPlusOne = dayOfMonth + 1
+
 
     return (
       thisYear2020.filter(data => Number(data.monthId) === month && data.dayInMonth >= dayOfMonth).map((data, index) => {
@@ -39,6 +79,42 @@ export default class HomeScreen extends Component {
 
         }
 
+
+        if ((monthIdEqualsMonth && dataDayInMonth === dayOfMonthPlusOne) && index === 0) {
+          Notifications.scheduleNotificationAsync({
+            content: {
+              title: "Hare Krsna! Friendly reminder:",
+              body: `Tomorrow is Ekadasi.`,
+            },
+            trigger: {
+              repeats: false,
+              year: 2020,
+              month: month + 1,
+              day: dataDayInMonth - 1,
+              hour: 2,
+              minute: 5,
+              second: 5,
+            }
+          });
+
+          return (
+            <View key={index} >
+              <Text style={styles.displayEkadasi}>
+                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
+              </Text>
+
+              <Button
+                buttonStyle={{ backgroundColor: "#f7ebc4" }}
+                containerStyle={{ marginBottom: 20, marginTop: 20 }}
+                titleStyle={{ color: '#12121c', fontSize: 20, marginBottom: 5 }}
+                title="Tomorrow is Ekadasi."
+              />
+            </View>
+          )
+
+        }
+
+
         if ((monthIdEqualsMonth && dataDayInMonth > dayOfMonth) && index === 0) {
           return (
             <View key={index} >
@@ -50,7 +126,6 @@ export default class HomeScreen extends Component {
         }
 
       })
-
 
     )
   }
@@ -70,7 +145,7 @@ export default class HomeScreen extends Component {
         <Button buttonStyle={[styles.codeHighlightContainer]} title="Tap for important notice..." titleStyle={styles.codeHighlightText} onPress={toggleOverlay} />
 
         <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-          <Text>NOTE: All dates are for Vrndavana, India. For your local dates tap "Resources" below and tap "Pure Bhakti Calendar." You can configure your local time on Pure Bhatki.</Text>
+          <Text style={styles.overlayBoxArea}  >NOTE: All dates are for Vrndavana, India. For your local dates tap "Resources" below and tap "Pure Bhakti Calendar." Configure your local time on purebhatki.com.</Text>
         </Overlay>
 
       </View>
@@ -90,13 +165,16 @@ export default class HomeScreen extends Component {
               source={require('../assets/images/bhaktabhandav.png')}
               style={styles.welcomeImage}
             />
+
           </View>
 
+          <LocalNotifs />
 
-          <Card
-            containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}
-            title={<this.GetAll />}
-          />
+          <Card containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}>
+            <Card.Title>The Next Ekadasi is...</Card.Title>
+            <Card.Divider />
+            {<this.GetAll />}
+          </Card>
 
         </ScrollView >
 
@@ -110,6 +188,38 @@ export default class HomeScreen extends Component {
 }
 
 
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    token = (await Notifications.getExpoPushTokenAsync()).data;
+
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+
+  if (Platform.OS === 'android') {
+    Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+
+  return token;
+}
+
+
 
 
 HomeScreen.navigationOptions = {
@@ -118,6 +228,15 @@ HomeScreen.navigationOptions = {
 
 
 const styles = StyleSheet.create({
+
+  overlayBoxArea: {
+    paddingTop: 30,
+    paddingBottom: 30,
+    paddingLeft: 12,
+    paddingRight: 12,
+    fontSize: 19,
+  },
+
   container: {
     flex: 1,
     backgroundColor: '#fff',
