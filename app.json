@@ -30,9 +30,8 @@
     },
     "android": {
       "package": "com.dominickdesigns.ekadasi",
+      "useNextNotificationsApi": true,
       "versionCode": 5
-
-
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

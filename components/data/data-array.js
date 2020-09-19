@@ -87,6 +87,23 @@ export const thisYear2020 = [
         "jsDayOfWeek": "0",
         "monthId": "8",
     },
+
+
+
+
+    {
+        "monthName": "September",
+        "dayInMonth": "20",
+        "dayOfWeek": "Sunday",
+        "ekadasiName": "Padmini",
+        "jsDayOfWeek": "0",
+        "monthId": "8",
+    },
+
+
+
+
+
     {
         "monthName": "September",
         "dayInMonth": "27",

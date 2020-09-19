@@ -1,4 +1,4 @@
-import React, { useState, Component, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Component } from 'react';
 import { Image, Platform, StyleSheet, Text, View, Vibration } from 'react-native';
 import { Card, Button, Overlay } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -91,9 +91,9 @@ export default class HomeScreen extends Component {
               year: 2020,
               month: month + 1,
               day: dataDayInMonth - 1,
-              hour: 2,
-              minute: 5,
-              second: 5,
+              hour: 11,
+              minute: 6,
+              second: 35,
             }
           });
 
@@ -203,6 +203,8 @@ async function registerForPushNotificationsAsync() {
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
 
+    console.log('this is token:', token)
+
   } else {
     alert('Must use physical device for Push Notifications');
   }
@@ -215,7 +217,6 @@ async function registerForPushNotificationsAsync() {
       lightColor: '#FF231F7C',
     });
   }
-
   return token;
 }
 
