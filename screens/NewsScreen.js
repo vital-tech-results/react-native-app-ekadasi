@@ -32,8 +32,6 @@ NewsScreen.navigationOptions = {
 
 
 
-
-
 function CalendarData() {
   let year = new Date().getFullYear();
   let month = new Date().getMonth();
@@ -42,29 +40,25 @@ function CalendarData() {
 
   return (
     data.thisYear2020.map((data) => {
-
       return (
         <View key={data.monthId}>
-          <Card title={data.monthName} />
+          <Card>
+            <Card.Title>{data.monthName}</Card.Title>
+            <Card.Divider />
+          </Card>
+
           <View>
-            <ListItem
-              key={data.monthId}
-              leftElement={() =>
-                (<View>
-                  <View>
-                    <Text>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}</Text>
-                    <Divider style={{ backgroundColor: 'blue' }} />
-                    <Text>{data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}</Text>
-                    <Divider style={{ backgroundColor: 'blue' }} />
-                    <Text>{data.thirdEkadasi.dayOfWeek} {data.thirdEkadasi.dayInMonth}</Text>
-                    <Divider style={{ backgroundColor: 'blue' }} />
-                  </View>
-                </View>
-                )}
-            />
+            <ListItem key={data.monthId} >
+              <ListItem.Content>
+                <ListItem.Title>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}</ListItem.Title>
+                <ListItem.Title>{data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}</ListItem.Title>
+                <ListItem.Subtitle>{data.thirdEkadasi.dayOfWeek} {data.thirdEkadasi.dayInMonth}</ListItem.Subtitle>
+              </ListItem.Content>
+            </ListItem>
           </View>
-          <Divider style={{ backgroundColor: 'blue' }} />
+
         </View>
+
       )
     })
   )

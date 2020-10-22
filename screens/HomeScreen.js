@@ -1,25 +1,31 @@
 import React, { useState, useEffect, useRef, Component } from 'react';
-import { Image, Platform, StyleSheet, Text, View, Vibration } from 'react-native';
-import { Card, Button, Overlay } from 'react-native-elements';
+import { Image, Platform, StyleSheet, View, Vibration, Alert, TouchableOpacity } from 'react-native';
+import { Card, Button, Overlay, Text, Badge, withBadge, Icon } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import { thisYear2020 } from '../components/data/data-array'
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import * as Permissions from 'expo-permissions';
-
+import { render } from 'react-dom';
+import OverlayNote from '../components/HomeScreenComponents/OverlayNoteComponent';
+import GetAll from '../components/HomeScreenComponents/DisplayNextEkadasiComponent';
 
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
     shouldPlaySound: true,
-    shouldSetBadge: false,
+    shouldSetBadge: true,
   }),
+  handleSuccess: async () => {
+    console.log("content success")
+  },
+  handleError: async () => {
+    console.log('error in handler ')
+  }
 });
 
 
-
-function LocalNotifs() {
+export default function HomeScreen() {
 
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState(false);
@@ -34,7 +40,7 @@ function LocalNotifs() {
     });
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-
+      console.log(response);
     });
 
     return () => {
@@ -43,149 +49,44 @@ function LocalNotifs() {
     };
   }, []);
 
-  return (null)
 
-}
+  return (
+    < View style={styles.container} >
+      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
 
-
-export default class HomeScreen extends Component {
-
-  GetAll = () => {
-    const month = new Date().getMonth();
-    const dayOfMonth = new Date().getDate();
-    const dayOfMonthPlusOne = dayOfMonth + 1
-
-
-    return (
-      thisYear2020.filter(data => Number(data.monthId) === month && data.dayInMonth >= dayOfMonth).map((data, index) => {
-
-        const monthIdEqualsMonth = Number(data.monthId) === month;
-        const dataDayInMonth = Number(data.dayInMonth);
-
-        if (monthIdEqualsMonth && dataDayInMonth === dayOfMonth) {
-          return (
-            <View key={index} >
-              <Button
-                buttonStyle={{ backgroundColor: "#15c240" }}
-                containerStyle={{ marginBottom: 20 }}
-                titleStyle={{ color: 'white', fontSize: 30, marginBottom: 10 }}
-                title="Today is Ekadasi"
-              />
-              <Text style={styles.displayEkadasi}>
-                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
-              </Text>
-            </View>
-          )
-
-        }
-
-
-        if ((monthIdEqualsMonth && dataDayInMonth === dayOfMonthPlusOne) && index === 0) {
-          Notifications.scheduleNotificationAsync({
-            content: {
-              title: "Hare Krsna! Friendly reminder:",
-              body: `Tomorrow is Ekadasi.`,
-            },
-            trigger: {
-              repeats: false,
-              year: 2020,
-              month: month + 1,
-              day: dataDayInMonth - 1,
-              hour: 11,
-              minute: 6,
-              second: 35,
-            }
-          });
-
-          return (
-            <View key={index} >
-              <Text style={styles.displayEkadasi}>
-                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
-              </Text>
-
-              <Button
-                buttonStyle={{ backgroundColor: "#f7ebc4" }}
-                containerStyle={{ marginBottom: 20, marginTop: 20 }}
-                titleStyle={{ color: '#12121c', fontSize: 20, marginBottom: 5 }}
-                title="Tomorrow is Ekadasi."
-              />
-            </View>
-          )
-
-        }
-
-
-        if ((monthIdEqualsMonth && dataDayInMonth > dayOfMonth) && index === 0) {
-          return (
-            <View key={index} >
-              <Text style={styles.displayEkadasi}>
-                {data.dayOfWeek}, {data.monthName} {data.dayInMonth}: {data.ekadasiName}
-              </Text>
-            </View>
-          )
-        }
-
-      })
-
-    )
-  }
-
-
-  OverlayNote = () => {
-    const [visible, setVisible] = useState(false);
-
-    const toggleOverlay = () => {
-      setVisible(!visible);
-    };
-
-    return (
-
-      <View>
-
-        <Button buttonStyle={[styles.codeHighlightContainer]} title="Tap for important notice..." titleStyle={styles.codeHighlightText} onPress={toggleOverlay} />
-
-        <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-          <Text style={styles.overlayBoxArea}  >NOTE: All dates are for Vrndavana, India. For your local dates tap "Resources" below and tap "Pure Bhakti Calendar." Configure your local time on purebhatki.com.</Text>
-        </Overlay>
-
-      </View>
-    );
-
-  }
-
-
-  render() {
-
-    return (
-      < View style={styles.container} >
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
-          <View style={styles.welcomeContainer}>
-            <Image
-              source={require('../assets/images/bhaktabhandav.png')}
-              style={styles.welcomeImage}
-            />
-
-          </View>
-
-          <LocalNotifs />
-
-          <Card containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}>
-            <Card.Title>The Next Ekadasi is...</Card.Title>
-            <Card.Divider />
-            {<this.GetAll />}
-          </Card>
-
-        </ScrollView >
-
-        <View style={styles.tabBarInfoContainer}>
-          <this.OverlayNote />
+        <View style={styles.welcomeContainer}>
+          <Image
+            source={require('../assets/images/bhaktabhandav.png')}
+            style={styles.welcomeImage}
+          />
         </View>
 
-      </View >
-    );
-  }
+        <Card containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}>
+          <Card.Title>The Next Ekadasi is...</Card.Title>
+          <Card.Divider />
+          <GetAll />
+        </Card>
+
+      </ScrollView >
+
+      <View style={styles.tabBarInfoContainer}>
+        <OverlayNote />
+      </View>
+
+    </View >
+  );
+
 }
+
+
+
+
+
+
+HomeScreen.navigationOptions = {
+  header: null,
+};
+
 
 
 async function registerForPushNotificationsAsync() {
@@ -202,9 +103,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-
-    console.log('this is token:', token)
-
+    console.log(token);
   } else {
     alert('Must use physical device for Push Notifications');
   }
@@ -217,15 +116,10 @@ async function registerForPushNotificationsAsync() {
       lightColor: '#FF231F7C',
     });
   }
+
   return token;
 }
 
-
-
-
-HomeScreen.navigationOptions = {
-  header: null,
-};
 
 
 const styles = StyleSheet.create({
@@ -237,6 +131,16 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     fontSize: 19,
   },
+
+  overlayBoxAreaForEkadasiText: {
+    marginTop: 50,
+    paddingTop: 30,
+    paddingBottom: 30,
+    paddingLeft: 12,
+    paddingRight: 12,
+    fontSize: 19,
+  },
+
 
   container: {
     flex: 1,

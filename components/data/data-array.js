@@ -5,7 +5,6 @@ export const thisYear2020 = [
         "dayInMonth": "4",
         "dayOfWeek": "Monday",
         "ekadasiName": "Mohini",
-        "jsDayOfWeek": "1",
         "monthId": "4",
     },
     {
@@ -13,7 +12,6 @@ export const thisYear2020 = [
         "dayInMonth": "18",
         "dayOfWeek": "Monday",
         "ekadasiName": "Apara",
-        "jsDayOfWeek": "1",
         "monthId": "4",
     },
 
@@ -22,7 +20,6 @@ export const thisYear2020 = [
         "dayInMonth": "2",
         "dayOfWeek": "Tuesday",
         "ekadasiName": "Pandava Nirjala",
-        "jsDayOfWeek": "2",
         "monthId": "5",
     },
     {
@@ -30,7 +27,6 @@ export const thisYear2020 = [
         "dayInMonth": "17",
         "dayOfWeek": "Wednesday",
         "ekadasiName": "Yogini",
-        "jsDayOfWeek": "3",
         "monthId": "5",
     },
 
@@ -40,7 +36,6 @@ export const thisYear2020 = [
         "dayInMonth": "1",
         "dayOfWeek": "Wednesday",
         "ekadasiName": "Sayana",
-        "jsDayOfWeek": "3",
         "monthId": "6",
     },
     {
@@ -48,7 +43,6 @@ export const thisYear2020 = [
         "dayInMonth": "16",
         "dayOfWeek": "Thursday",
         "ekadasiName": "Kamika",
-        "jsDayOfWeek": "4",
         "monthId": "6",
     },
     {
@@ -56,7 +50,6 @@ export const thisYear2020 = [
         "dayInMonth": "30",
         "dayOfWeek": "Thursday",
         "ekadasiName": "Pavitropana",
-        "jsDayOfWeek": "4",
         "monthId": "6",
     },
 
@@ -66,7 +59,6 @@ export const thisYear2020 = [
         "dayInMonth": "15",
         "dayOfWeek": "Saturday",
         "ekadasiName": "Annada",
-        "jsDayOfWeek": "6",
         "monthId": "7",
     },
     {
@@ -74,7 +66,6 @@ export const thisYear2020 = [
         "dayInMonth": "29",
         "dayOfWeek": "Saturday",
         "ekadasiName": "Parsva",
-        "jsDayOfWeek": "6",
         "monthId": "7",
     },
 
@@ -84,34 +75,16 @@ export const thisYear2020 = [
         "dayInMonth": "13",
         "dayOfWeek": "Sunday",
         "ekadasiName": "Indira",
-        "jsDayOfWeek": "0",
         "monthId": "8",
     },
-
-
-
-
-    {
-        "monthName": "September",
-        "dayInMonth": "20",
-        "dayOfWeek": "Sunday",
-        "ekadasiName": "Padmini",
-        "jsDayOfWeek": "0",
-        "monthId": "8",
-    },
-
-
-
-
-
     {
         "monthName": "September",
         "dayInMonth": "27",
         "dayOfWeek": "Sunday",
         "ekadasiName": "Padmini",
-        "jsDayOfWeek": "0",
         "monthId": "8",
     },
+
 
 
 
@@ -120,15 +93,13 @@ export const thisYear2020 = [
         "dayInMonth": "13",
         "dayOfWeek": "Tuesday",
         "ekadasiName": "Parama",
-        "jsDayOfWeek": "2",
         "monthId": "9",
     },
     {
         "monthName": "October",
-        "dayInMonth": "27",
+        "dayInMonth": "22",
         "dayOfWeek": "Tuesday",
         "ekadasiName": "Pasankusa",
-        "jsDayOfWeek": "2",
         "monthId": "9",
     },
 
@@ -139,7 +110,6 @@ export const thisYear2020 = [
         "dayInMonth": "11",
         "dayOfWeek": "Wednesday",
         "ekadasiName": "Rama",
-        "jsDayOfWeek": "3",
         "monthId": "10",
     },
     {
@@ -147,7 +117,6 @@ export const thisYear2020 = [
         "dayInMonth": "26",
         "dayOfWeek": "Thursday",
         "ekadasiName": "Utthana",
-        "jsDayOfWeek": "4",
         "monthId": "10",
     },
 
@@ -157,7 +126,6 @@ export const thisYear2020 = [
         "dayInMonth": "11",
         "dayOfWeek": "Friday",
         "ekadasiName": "Utpanna",
-        "jsDayOfWeek": "5",
         "monthId": "11",
     },
     {
@@ -165,7 +133,6 @@ export const thisYear2020 = [
         "dayInMonth": "25",
         "dayOfWeek": "Friday",
         "ekadasiName": "Moksada",
-        "jsDayOfWeek": "5",
         "monthId": "11",
     }
 ]

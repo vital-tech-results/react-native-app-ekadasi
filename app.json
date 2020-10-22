@@ -7,7 +7,7 @@
       "android",
       "web"
     ],
-    "version": "0.0.5",
+    "version": "0.0.7",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -24,14 +24,19 @@
     ],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.3",
-      "supportsTablet": true
-
+      "buildNumber": "0.0.5",
+      "supportsTablet": true,
+      "infoPlist": {
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
+      }
     },
     "android": {
       "package": "com.dominickdesigns.ekadasi",
       "useNextNotificationsApi": true,
-      "versionCode": 5
+      "versionCode": 6
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
