@@ -2,12 +2,8 @@
   "expo": {
     "name": "ekadasi",
     "slug": "ekadasi",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
-    "version": "0.0.7",
+    "platforms": ["ios", "android", "web"],
+    "version": "0.0.8",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -19,24 +15,20 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.5",
+      "buildNumber": "0.0.6",
       "supportsTablet": true,
       "infoPlist": {
-        "UIBackgroundModes": [
-          "location",
-          "fetch"
-        ]
+        "UIBackgroundModes": ["fetch"]
       }
     },
     "android": {
       "package": "com.dominickdesigns.ekadasi",
       "useNextNotificationsApi": true,
-      "versionCode": 6
+      "permissions": [],
+      "versionCode": 8
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

@@ -1,0 +1,57 @@
+{
+  "thisYear2021": [
+    {
+      "monthId": "0",
+      "monthName": "January",
+      "firstEkadasi": {
+        "jsDayOfWeek": "6",
+        "dayOfWeek": "Saturday",
+        "dayInMonth": "9",
+        "ekadasiName": "Saphala"
+      },
+      "secondEkadasi": {
+        "jsDayOfWeek": "0",
+        "dayOfWeek": "Sunday",
+        "dayInMonth": "24",
+        "ekadasiName": "Putrada"
+      },
+      "thirdEkadasi": {}
+    },
+
+    {
+      "monthId": "1",
+      "monthName": "February",
+      "firstEkadasi": {
+        "jsDayOfWeek": "1",
+        "dayOfWeek": "Monday",
+        "dayInMonth": "8",
+        "ekadasiName": "Sat-tila"
+      },
+      "secondEkadasi": {
+        "jsDayOfWeek": "3",
+        "dayOfWeek": "Wednesday",
+        "dayInMonth": "23",
+        "ekadasiName": "Bhaimi"
+      },
+      "thirdEkadasi": {}
+    },
+
+    {
+      "monthId": "2",
+      "monthName": "March",
+      "firstEkadasi": {
+        "jsDayOfWeek": "2",
+        "dayOfWeek": "Tuesday",
+        "dayInMonth": "9",
+        "ekadasiName": "Vijaya"
+      },
+      "secondEkadasi": {
+        "jsDayOfWeek": "2",
+        "dayOfWeek": "Tuesday",
+        "dayInMonth": "23",
+        "ekadasiName": "Amalaki"
+      },
+      "thirdEkadasi": {}
+    }
+  ]
+}

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, View, Button } from 'react-native';
 import { Card, Divider, ListItem } from 'react-native-elements';
 import { ScrollView } from 'react-native-gesture-handler';
-import * as data from '../components/data/data';
+import * as data from '../components/data/data-2021';
 
 export default function NewsScreen() {
   return (
@@ -39,7 +39,7 @@ function CalendarData() {
   const today = ((year) + " " + (month) + " " + (dayOfMonth));
 
   return (
-    data.thisYear2020.map((data) => {
+    data.thisYear2021.map((data) => {
       return (
         <View key={data.monthId}>
           <Card>

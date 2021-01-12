@@ -97,7 +97,7 @@ export const thisYear2020 = [
     },
     {
         "monthName": "October",
-        "dayInMonth": "22",
+        "dayInMonth": "27",
         "dayOfWeek": "Tuesday",
         "ekadasiName": "Pasankusa",
         "monthId": "9",
