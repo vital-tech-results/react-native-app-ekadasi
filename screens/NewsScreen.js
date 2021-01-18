@@ -1,27 +1,28 @@
-import * as WebBrowser from 'expo-web-browser';
-import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, View, Button } from 'react-native';
-import { Card, Divider, ListItem } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
-import * as data from '../components/data/data-2021';
+import * as WebBrowser from "expo-web-browser";
+import * as React from "react";
+import { Image, Platform, StyleSheet, Text, View, Button } from "react-native";
+import { Card, Divider, ListItem } from "react-native-elements";
+import { ScrollView } from "react-native-gesture-handler";
+import * as data from "../data/data-array-2021";
 
 export default function NewsScreen() {
   return (
     <View style={styles.container}>
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         <View style={styles.welcomeContainer}>
           <Image
-            source={require('../assets/images/bhaktabhandav.png')}
+            source={require("../assets/images/bhaktabhandav.png")}
             style={styles.welcomeImage}
           />
         </View>
 
-        <View >
+        <View>
           <CalendarData />
         </View>
-
       </ScrollView>
-
     </View>
   );
 }
@@ -30,126 +31,58 @@ NewsScreen.navigationOptions = {
   header: null,
 };
 
-
-
 function CalendarData() {
   let year = new Date().getFullYear();
   let month = new Date().getMonth();
   let dayOfMonth = new Date().getDate();
-  const today = ((year) + " " + (month) + " " + (dayOfMonth));
+  const today = year + " " + month + " " + dayOfMonth;
 
-  return (
-    data.thisYear2021.map((data) => {
-      return (
-        <View key={data.monthId}>
-          <Card>
-            <Card.Title>{data.monthName}</Card.Title>
-            <Card.Divider />
-          </Card>
-
+  return data.thisYear2021.map(data => {
+    return (
+      <View key={data.monthId}>
+        <Card>
           <View>
-            <ListItem key={data.monthId} >
+            <ListItem key={data.monthId}>
               <ListItem.Content>
-                <ListItem.Title>{data.firstEkadasi.dayOfWeek}, {data.monthName} {data.firstEkadasi.dayInMonth}</ListItem.Title>
-                <ListItem.Title>{data.secondEkadasi.dayOfWeek}, {data.monthName} {data.secondEkadasi.dayInMonth}</ListItem.Title>
-                <ListItem.Subtitle>{data.thirdEkadasi.dayOfWeek} {data.thirdEkadasi.dayInMonth}</ListItem.Subtitle>
+                <ListItem.Title style={styles.getStartedText}>
+                  {data.dayOfWeek}, {data.monthName} {data.dayInMonth}
+                </ListItem.Title>
               </ListItem.Content>
             </ListItem>
           </View>
-
-        </View>
-
-      )
-    })
-  )
+        </Card>
+      </View>
+    );
+  });
 }
-
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
-  developmentModeText: {
-    marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: 'center',
-  },
+
   contentContainer: {
     paddingTop: 30,
   },
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
     marginBottom: 20,
   },
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 3,
     marginLeft: -10,
   },
-  getStartedContainer: {
-    alignItems: 'center',
-    marginHorizontal: 50,
-  },
-  NewsScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
-  },
-  codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    alignSelf: "center",
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
-  },
-  tabBarInfoContainer: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: 'black',
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: 'center',
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+    textAlign: "center",
+    fontWeight: "bold",
   },
 });

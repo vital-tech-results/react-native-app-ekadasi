@@ -1,14 +1,29 @@
-import React, { useState, useEffect, useRef, Component } from 'react';
-import { Image, Platform, StyleSheet, View, Vibration, Alert, TouchableOpacity } from 'react-native';
-import { Card, Button, Overlay, Text, Badge, withBadge, Icon } from 'react-native-elements';
-import { ScrollView } from 'react-native-gesture-handler';
-import Constants from 'expo-constants';
-import * as Notifications from 'expo-notifications';
-import * as Permissions from 'expo-permissions';
-import { render } from 'react-dom';
-import OverlayNote from '../components/HomeScreenComponents/OverlayNoteComponent';
-import GetAll from '../components/HomeScreenComponents/DisplayNextEkadasiComponent';
-
+import React, { useState, useEffect, useRef, Component } from "react";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  View,
+  Vibration,
+  Alert,
+  TouchableOpacity,
+} from "react-native";
+import {
+  Card,
+  Button,
+  Overlay,
+  Text,
+  Badge,
+  withBadge,
+  Icon,
+} from "react-native-elements";
+import { ScrollView } from "react-native-gesture-handler";
+import Constants from "expo-constants";
+import * as Notifications from "expo-notifications";
+import * as Permissions from "expo-permissions";
+import { render } from "react-dom";
+import OverlayNote from "../components/HomeScreenComponents/OverlayNoteComponent";
+import GetAll from "../components/HomeScreenComponents/DisplayNextEkadasiComponent";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -17,17 +32,15 @@ Notifications.setNotificationHandler({
     shouldSetBadge: true,
   }),
   handleSuccess: async () => {
-    console.log("content success")
+    console.log("setnotificationHandeler in HomeScreen is success");
   },
   handleError: async () => {
-    console.log('error in handler ')
-  }
+    console.log("error in handler ");
+  },
 });
 
-
 export default function HomeScreen() {
-
-  const [expoPushToken, setExpoPushToken] = useState('');
+  const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
   const responseListener = useRef();
@@ -35,13 +48,17 @@ export default function HomeScreen() {
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
-    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      setNotification(notification);
-    });
+    notificationListener.current = Notifications.addNotificationReceivedListener(
+      notification => {
+        setNotification(notification);
+      }
+    );
 
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(
+      response => {
+        console.log(response);
+      }
+    );
 
     return () => {
       Notifications.removeNotificationSubscription(notificationListener);
@@ -49,81 +66,71 @@ export default function HomeScreen() {
     };
   }, []);
 
-
   return (
-    < View style={styles.container} >
-      <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-
+    <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.contentContainer}
+      >
         <View style={styles.welcomeContainer}>
           <Image
-            source={require('../assets/images/bhaktabhandav.png')}
+            source={require("../assets/images/bhaktabhandav.png")}
             style={styles.welcomeImage}
           />
         </View>
 
-        <Card containerStyle={{ backgroundColor: 'rgb(248, 211, 110)' }}>
+        <Card containerStyle={{ backgroundColor: "rgb(248, 211, 110)" }}>
           <Card.Title>The Next Ekadasi is...</Card.Title>
           <Card.Divider />
           <GetAll />
         </Card>
-
-      </ScrollView >
+      </ScrollView>
 
       <View style={styles.tabBarInfoContainer}>
         <OverlayNote />
       </View>
-
-    </View >
+    </View>
   );
-
 }
-
-
-
-
-
 
 HomeScreen.navigationOptions = {
   header: null,
 };
 
-
-
 async function registerForPushNotificationsAsync() {
   let token;
   if (Constants.isDevice) {
-    const { status: existingStatus } = await Permissions.getAsync(Permissions.NOTIFICATIONS);
+    const { status: existingStatus } = await Permissions.getAsync(
+      Permissions.NOTIFICATIONS
+    );
     let finalStatus = existingStatus;
-    if (existingStatus !== 'granted') {
+    if (existingStatus !== "granted") {
       const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
       finalStatus = status;
     }
-    if (finalStatus !== 'granted') {
-      alert('Failed to get push token for push notification!');
+    if (finalStatus !== "granted") {
+      alert("Failed to get push token for push notification!");
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
     console.log(token);
   } else {
-    alert('Must use physical device for Push Notifications');
+    alert("Must use physical device for Push Notifications");
   }
 
-  if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
+  if (Platform.OS === "android") {
+    Notifications.setNotificationChannelAsync("default", {
+      name: "default",
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
-      lightColor: '#FF231F7C',
+      lightColor: "#FF231F7C",
     });
   }
 
   return token;
 }
 
-
-
 const styles = StyleSheet.create({
-
   overlayBoxArea: {
     paddingTop: 30,
     paddingBottom: 30,
@@ -141,10 +148,9 @@ const styles = StyleSheet.create({
     fontSize: 19,
   },
 
-
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
   },
   displayEkadasi: {
     fontSize: 25,
@@ -152,63 +158,63 @@ const styles = StyleSheet.create({
 
   todayIsEkadasiStyle: {
     fontSize: 25,
-    color: 'white',
-    alignSelf: 'center',
+    color: "white",
+    alignSelf: "center",
   },
   developmentModeText: {
     marginBottom: 20,
-    color: 'rgba(0,0,0,0.4)',
+    color: "rgba(0,0,0,0.4)",
     fontSize: 14,
     lineHeight: 19,
-    textAlign: 'center',
+    textAlign: "center",
   },
   contentContainer: {
     paddingTop: 30,
   },
   welcomeContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 10,
     marginBottom: 20,
     marginLeft: 20,
-    marginRight: 20
+    marginRight: 20,
   },
 
   welcomeImage: {
     width: 100,
     height: 80,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 3,
-    marginBottom: 30
+    marginBottom: 30,
   },
   getStartedContainer: {
-    alignItems: 'center',
+    alignItems: "center",
     marginHorizontal: 50,
   },
   homeScreenFilename: {
     marginVertical: 7,
   },
   codeHighlightText: {
-    color: 'rgba(96,100,109, 0.8)',
+    color: "rgba(96,100,109, 0.8)",
   },
   codeHighlightContainer: {
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: "rgba(0,0,0,0.05)",
     borderRadius: 3,
     paddingHorizontal: 4,
   },
   getStartedText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
+    color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: 'center',
+    textAlign: "center",
   },
   tabBarInfoContainer: {
-    position: 'absolute',
+    position: "absolute",
     bottom: 0,
     left: 0,
     right: 0,
     ...Platform.select({
       ios: {
-        shadowColor: 'black',
+        shadowColor: "black",
         shadowOffset: { width: 0, height: -3 },
         shadowOpacity: 0.1,
         shadowRadius: 3,
@@ -217,33 +223,27 @@ const styles = StyleSheet.create({
         elevation: 20,
       },
     }),
-    alignItems: 'center',
-    backgroundColor: '#fbfbfb',
+    alignItems: "center",
+    backgroundColor: "#fbfbfb",
     paddingVertical: 20,
   },
   tabBarInfoText: {
     fontSize: 17,
-    color: 'rgba(96,100,109, 1)',
-    textAlign: 'center',
+    color: "rgba(96,100,109, 1)",
+    textAlign: "center",
   },
   navigationFilename: {
     marginTop: 5,
   },
   helpContainer: {
     marginTop: 15,
-    alignItems: 'center',
+    alignItems: "center",
   },
   helpLink: {
     paddingVertical: 15,
   },
   helpLinkText: {
     fontSize: 14,
-    color: '#2e78b7',
+    color: "#2e78b7",
   },
 });
-
-
-
-
-
-

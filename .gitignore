@@ -9,10 +9,10 @@ npm-debug.*
 *.orig.*
 web-build/
 
-/ignore/notes.md
+ignore/notes.md
 
-/assets/images/ignore-these
-/assets/ignore-files
-/ignore
+assets/images/ignore-these
+assets/ignore-files
+ignore/**/*
 # macOS
 .DS_Store
