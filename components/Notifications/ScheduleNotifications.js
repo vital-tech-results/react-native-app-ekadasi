@@ -5,33 +5,16 @@ export default async function schedulePushNotification() {
     content: {
       badge: 1,
       sound: true,
-      title: "1Hare Krsna! Friendly reminder:",
+      title: "Hare Krsna! Friendly reminder:",
       body: `Tomorrow is Ekadasi.`,
     },
     trigger: {
       repeats: true,
       year: 2021,
       month: 1,
-      day: 19,
-      hour: 20,
-      minute: 37,
-      second: 2,
-    },
-  });
-  await Notifications.scheduleNotificationAsync({
-    content: {
-      badge: 1,
-      sound: true,
-      title: "2Hare Krsna! Friendly reminder:",
-      body: `Tomorrow is Ekadasi.`,
-    },
-    trigger: {
-      repeats: false,
-      year: 2021,
-      month: 1,
-      day: 20,
+      day: 23,
       hour: 4,
-      minute: 29,
+      minute: 3,
       second: 2,
     },
   });
@@ -39,16 +22,67 @@ export default async function schedulePushNotification() {
     content: {
       badge: 1,
       sound: true,
-      title: "3Hare Krsna! Friendly reminder:",
+      title: "Hare Krsna! Friendly reminder:",
       body: `Tomorrow is Ekadasi.`,
     },
     trigger: {
       repeats: false,
       year: 2021,
-      month: 1,
-      day: 20,
-      hour: 8,
-      minute: 15,
+      month: 2,
+      day: 7,
+      hour: 4,
+      minute: 3,
+      second: 2,
+    },
+  });
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      badge: 1,
+      sound: true,
+      title: "Hare Krsna! Friendly reminder:",
+      body: `Tomorrow is Ekadasi.`,
+    },
+    trigger: {
+      repeats: false,
+      year: 2021,
+      month: 2,
+      day: 22,
+      hour: 4,
+      minute: 3,
+      second: 2,
+    },
+  });
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      badge: 1,
+      sound: true,
+      title: "Hare Krsna! Friendly reminder:",
+      body: `Tomorrow is Ekadasi.`,
+    },
+    trigger: {
+      repeats: false,
+      year: 2021,
+      month: 3,
+      day: 8,
+      hour: 4,
+      minute: 3,
+      second: 2,
+    },
+  });
+  await Notifications.scheduleNotificationAsync({
+    content: {
+      badge: 1,
+      sound: true,
+      title: "Hare Krsna! Friendly reminder:",
+      body: `Tomorrow is Ekadasi.`,
+    },
+    trigger: {
+      repeats: false,
+      year: 2021,
+      month: 3,
+      day: 22,
+      hour: 4,
+      minute: 3,
       second: 2,
     },
   });

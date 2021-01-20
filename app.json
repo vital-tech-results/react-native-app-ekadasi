@@ -18,7 +18,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.7",
+      "buildNumber": "0.0.8",
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": ["fetch"]
@@ -29,7 +29,7 @@
       "useNextNotificationsApi": true,
       "permissions": [],
       "googleServicesFile": "./google-services.json",
-      "versionCode": 9
+      "versionCode": 10
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
