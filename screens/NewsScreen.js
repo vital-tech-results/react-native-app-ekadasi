@@ -1,7 +1,6 @@
-import * as WebBrowser from "expo-web-browser";
 import * as React from "react";
-import { Image, Platform, StyleSheet, Text, View, Button } from "react-native";
-import { Card, Divider, ListItem } from "react-native-elements";
+import { Image, StyleSheet, View } from "react-native";
+import { Card, ListItem } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import * as data from "../data/data-array-2021";
 
@@ -39,10 +38,10 @@ function CalendarData() {
 
   return data.thisYear2021.map(data => {
     return (
-      <View key={data.monthId}>
+      <View key={data.ekadasiName}>
         <Card>
           <View>
-            <ListItem key={data.monthId}>
+            <ListItem key={data.ekadasiName}>
               <ListItem.Content>
                 <ListItem.Title style={styles.getStartedText}>
                   {data.dayOfWeek}, {data.monthName} {data.dayInMonth}

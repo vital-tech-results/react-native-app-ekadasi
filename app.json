@@ -3,7 +3,7 @@
     "name": "ekadasi",
     "slug": "ekadasi",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.8",
+    "version": "0.0.9",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -18,7 +18,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.6",
+      "buildNumber": "0.0.7",
       "supportsTablet": true,
       "infoPlist": {
         "UIBackgroundModes": ["fetch"]
@@ -28,7 +28,8 @@
       "package": "com.dominickdesigns.ekadasi",
       "useNextNotificationsApi": true,
       "permissions": [],
-      "versionCode": 8
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 9
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

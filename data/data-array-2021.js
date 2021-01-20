@@ -11,8 +11,7 @@ export const thisYear2021 = [
   {
     ekadasiName: "Putrada",
     monthName: "January",
-    // dayInMonth: "24",
-    dayInMonth: "18",
+    dayInMonth: "24",
     dayOfWeek: "Sunday",
     monthId: "0",
     aboutThisEkadasi: "",

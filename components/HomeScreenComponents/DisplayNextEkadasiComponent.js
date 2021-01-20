@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet } from "react-native";
-import * as Notifications from "expo-notifications";
 import { thisYear2021 } from "../../data/data-array-2021";
 import NextEkadasiIs from "./DisplayTextOfNextEkadasi";
 import TodayOrTomorowIsEkadasi from "./TodayOrTomorrowIsEkadasi";
@@ -60,22 +59,6 @@ class GetAll extends Component {
           dataDayInMonth === dayOfMonthPlusOne &&
           index === 0
         ) {
-          Notifications.scheduleNotificationAsync({
-            content: {
-              title: "Hare Krsna! Friendly reminder:",
-              body: `Tomorrow is Ekadasi.`,
-            },
-            trigger: {
-              repeats: false,
-              year: 2021,
-              month: month + 1,
-              day: dataDayInMonth - 1,
-              hour: 14,
-              minute: 12,
-              second: 3,
-            },
-          });
-
           return (
             <TodayOrTomorowIsEkadasi
               key={index}
@@ -101,16 +84,14 @@ class GetAll extends Component {
 
         if (monthIdEqualsMonth && dataDayInMonth > dayOfMonth && index === 0) {
           return (
-            <>
-              <NextEkadasiIs
-                key={index}
-                style={styles.displayEkadasi}
-                dayOfWeek={data.dayOfWeek}
-                monthName={data.monthName}
-                dayInMonth={data.dayInMonth}
-                ekadasiName={data.ekadasiName}
-              />
-            </>
+            <NextEkadasiIs
+              key={index}
+              style={styles.displayEkadasi}
+              dayOfWeek={data.dayOfWeek}
+              monthName={data.monthName}
+              dayInMonth={data.dayInMonth}
+              ekadasiName={data.ekadasiName}
+            />
           );
         }
 

@@ -1,29 +1,16 @@
 import React, { useState, useEffect, useRef, Component } from "react";
-import {
-  Image,
-  Platform,
-  StyleSheet,
-  View,
-  Vibration,
-  Alert,
-  TouchableOpacity,
-} from "react-native";
-import {
-  Card,
-  Button,
-  Overlay,
-  Text,
-  Badge,
-  withBadge,
-  Icon,
-} from "react-native-elements";
+import { Image, Platform, StyleSheet, View } from "react-native";
+import { Card } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
-import { render } from "react-dom";
+
 import OverlayNote from "../components/HomeScreenComponents/OverlayNoteComponent";
 import GetAll from "../components/HomeScreenComponents/DisplayNextEkadasiComponent";
+import schedulePushNotification from "../components/Notifications/ScheduleNotifications";
+
+schedulePushNotification();
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -45,6 +32,11 @@ export default function HomeScreen() {
   const notificationListener = useRef();
   const responseListener = useRef();
 
+  const clearAllBadges = () => {
+    Notifications.setBadgeCountAsync(0);
+  };
+  clearAllBadges();
+
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
@@ -56,7 +48,7 @@ export default function HomeScreen() {
 
     responseListener.current = Notifications.addNotificationResponseReceivedListener(
       response => {
-        console.log(response);
+        Notifications.setBadgeCountAsync(0);
       }
     );
 
@@ -100,12 +92,21 @@ HomeScreen.navigationOptions = {
 async function registerForPushNotificationsAsync() {
   let token;
   if (Constants.isDevice) {
-    const { status: existingStatus } = await Permissions.getAsync(
-      Permissions.NOTIFICATIONS
-    );
+    const {
+      status: existingStatus,
+    } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
     if (existingStatus !== "granted") {
-      const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = await Notifications.requestPermissionsAsync({
+        ios: {
+          allowAlert: true,
+          allowBadge: true,
+          allowSound: true,
+          allowAnnouncements: true,
+        },
+      });
+
       finalStatus = status;
     }
     if (finalStatus !== "granted") {
@@ -113,7 +114,7 @@ async function registerForPushNotificationsAsync() {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
-    console.log(token);
+    // console.log(token);
   } else {
     alert("Must use physical device for Push Notifications");
   }
