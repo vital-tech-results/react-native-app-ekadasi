@@ -1,28 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
-import * as WebBrowser from "expo-web-browser";
-import React, { useState } from "react";
-import { StyleSheet, Text, View, Platform, Linking } from "react-native";
-import { Button, Overlay } from "react-native-elements";
+
+import React from "react";
+import { StyleSheet, Text, View, Linking } from "react-native";
 import { RectButton, ScrollView } from "react-native-gesture-handler";
 
-export default function LinksScreen() {
+export default function ConstactScreen() {
   return (
     <ScrollView
       style={styles.container}
       contentContainerStyle={styles.contentContainer}
     >
-      <OptionButton
-        icon="md-calendar"
-        label="Pure Bhakti Calendar"
-        onPress={bhaktiCalendar}
-      />
-
-      <OptionButton
-        icon="md-school"
-        label="Ekadasi Reading Material"
-        onPress={kripaTv}
-      />
-
       <OptionButton
         icon="ios-help-buoy"
         label="Contact Support"
@@ -55,16 +42,6 @@ function OptionButton({ icon, label, onPress, isLastOption }) {
   );
 }
 
-function bhaktiCalendar() {
-  WebBrowser.openBrowserAsync(
-    "https://www.purebhakti.com/resources/vaisnava-calendar"
-  );
-}
-
-function kripaTv() {
-  WebBrowser.openBrowserAsync("https://bhakta.org/tag/ekadasi/");
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -90,31 +67,7 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 15,
     alignSelf: "flex-start",
+    paddingRight: 20,
     marginTop: 1,
-  },
-  tabBarInfoContainer: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    ...Platform.select({
-      ios: {
-        shadowColor: "black",
-        shadowOffset: { width: 0, height: -3 },
-        shadowOpacity: 0.1,
-        shadowRadius: 3,
-      },
-      android: {
-        elevation: 20,
-      },
-    }),
-    alignItems: "center",
-    backgroundColor: "#fbfbfb",
-    paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    textAlign: "center",
   },
 });

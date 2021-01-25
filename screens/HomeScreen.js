@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useRef, Component } from "react";
-import { Image, Platform, StyleSheet, View } from "react-native";
-import { Card } from "react-native-elements";
+import React, { useState, useEffect, useRef } from "react";
+import { Image, Platform, StyleSheet, View, Text } from "react-native";
+import { Card, Divider } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import Constants from "expo-constants";
 import * as Notifications from "expo-notifications";
 import * as Permissions from "expo-permissions";
 
+import { BlurView } from "expo-blur";
+
 import OverlayNote from "../components/HomeScreenComponents/OverlayNoteComponent";
 import GetAll from "../components/HomeScreenComponents/DisplayNextEkadasiComponent";
 import schedulePushNotification from "../components/Notifications/ScheduleNotifications";
+
+import ListAllEkadasisThisYear from "../components/ListAllEkadasisThisYear";
 
 schedulePushNotification();
 
@@ -19,10 +23,10 @@ Notifications.setNotificationHandler({
     shouldSetBadge: true,
   }),
   handleSuccess: async () => {
-    console.log("setnotificationHandeler in HomeScreen is success");
+    // console.log("setnotificationHandeler in HomeScreen is success");
   },
   handleError: async () => {
-    console.log("error in handler ");
+    // console.log("error in handler ");
   },
 });
 
@@ -70,14 +74,33 @@ export default function HomeScreen() {
             style={styles.welcomeImage}
           />
         </View>
-
-        <Card containerStyle={{ backgroundColor: "rgb(248, 211, 110)" }}>
+        <Card
+          containerStyle={{
+            backgroundColor: "rgb(248, 211, 110)",
+          }}
+        >
           <Card.Title>The Next Ekadasi is...</Card.Title>
           <Card.Divider />
           <GetAll />
         </Card>
-      </ScrollView>
+        <Divider
+          style={{
+            backgroundColor: "rgb(248, 211, 110)",
+            padding: 5,
+            marginTop: 50,
+            marginBottom: 50,
+          }}
+        />
+        <BlurView intensity={10} tint="dark">
+          <Text style={styles.getStartedText}>
+            Scroll to view list of all Ekadasi dates for 2021 (Vrndavana time
+            zone). To view Ekadasi dates for your local time zone, tap the
+            "PureBhakti" tab below and configure your time zone there.
+          </Text>
+        </BlurView>
 
+        <ListAllEkadasisThisYear />
+      </ScrollView>
       <View style={styles.tabBarInfoContainer}>
         <OverlayNote />
       </View>
@@ -132,45 +155,14 @@ async function registerForPushNotificationsAsync() {
 }
 
 const styles = StyleSheet.create({
-  overlayBoxArea: {
-    paddingTop: 30,
-    paddingBottom: 30,
-    paddingLeft: 12,
-    paddingRight: 12,
-    fontSize: 19,
-  },
-
-  overlayBoxAreaForEkadasiText: {
-    marginTop: 50,
-    paddingTop: 30,
-    paddingBottom: 30,
-    paddingLeft: 12,
-    paddingRight: 12,
-    fontSize: 19,
-  },
-
   container: {
     flex: 1,
     backgroundColor: "#fff",
   },
-  displayEkadasi: {
-    fontSize: 25,
-  },
 
-  todayIsEkadasiStyle: {
-    fontSize: 25,
-    color: "white",
-    alignSelf: "center",
-  },
-  developmentModeText: {
-    marginBottom: 20,
-    color: "rgba(0,0,0,0.4)",
-    fontSize: 14,
-    lineHeight: 19,
-    textAlign: "center",
-  },
   contentContainer: {
     paddingTop: 30,
+    paddingBottom: 150,
   },
   welcomeContainer: {
     alignItems: "center",
@@ -187,26 +179,13 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginBottom: 30,
   },
-  getStartedContainer: {
-    alignItems: "center",
-    marginHorizontal: 50,
-  },
-  homeScreenFilename: {
-    marginVertical: 7,
-  },
-  codeHighlightText: {
-    color: "rgba(96,100,109, 0.8)",
-  },
-  codeHighlightContainer: {
-    backgroundColor: "rgba(0,0,0,0.05)",
-    borderRadius: 3,
-    paddingHorizontal: 4,
-  },
+
   getStartedText: {
     fontSize: 17,
     color: "rgba(96,100,109, 1)",
     lineHeight: 24,
-    textAlign: "center",
+    textAlign: "left",
+    padding: 30,
   },
   tabBarInfoContainer: {
     position: "absolute",
@@ -227,24 +206,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fbfbfb",
     paddingVertical: 20,
-  },
-  tabBarInfoText: {
-    fontSize: 17,
-    color: "rgba(96,100,109, 1)",
-    textAlign: "center",
-  },
-  navigationFilename: {
-    marginTop: 5,
-  },
-  helpContainer: {
-    marginTop: 15,
-    alignItems: "center",
-  },
-  helpLink: {
-    paddingVertical: 15,
-  },
-  helpLinkText: {
-    fontSize: 14,
-    color: "#2e78b7",
   },
 });

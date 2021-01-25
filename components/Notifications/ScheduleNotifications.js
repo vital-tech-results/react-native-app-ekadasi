@@ -9,13 +9,10 @@ export default async function schedulePushNotification() {
       body: `Tomorrow is Ekadasi.`,
     },
     trigger: {
-      repeats: true,
+      repeats: false,
       year: 2021,
       month: 1,
       day: 23,
-      hour: 4,
-      minute: 3,
-      second: 2,
     },
   });
   await Notifications.scheduleNotificationAsync({
@@ -30,9 +27,6 @@ export default async function schedulePushNotification() {
       year: 2021,
       month: 2,
       day: 7,
-      hour: 4,
-      minute: 3,
-      second: 2,
     },
   });
   await Notifications.scheduleNotificationAsync({
@@ -47,9 +41,6 @@ export default async function schedulePushNotification() {
       year: 2021,
       month: 2,
       day: 22,
-      hour: 4,
-      minute: 3,
-      second: 2,
     },
   });
   await Notifications.scheduleNotificationAsync({
@@ -64,9 +55,6 @@ export default async function schedulePushNotification() {
       year: 2021,
       month: 3,
       day: 8,
-      hour: 4,
-      minute: 3,
-      second: 2,
     },
   });
   await Notifications.scheduleNotificationAsync({
@@ -81,9 +69,6 @@ export default async function schedulePushNotification() {
       year: 2021,
       month: 3,
       day: 22,
-      hour: 4,
-      minute: 3,
-      second: 2,
     },
   });
 }

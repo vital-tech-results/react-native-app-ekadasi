@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet } from "react-native";
 import { thisYear2021 } from "../../data/data-array-2021";
+
 import NextEkadasiIs from "./DisplayTextOfNextEkadasi";
 import TodayOrTomorowIsEkadasi from "./TodayOrTomorrowIsEkadasi";
 

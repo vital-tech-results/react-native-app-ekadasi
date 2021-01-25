@@ -2,24 +2,28 @@ import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import * as React from "react";
+import { StyleSheet } from "react-native";
+import * as ScreenOrientation from "expo-screen-orientation";
+import * as Haptics from "expo-haptics";
 
 import Colors from "../constants/ColorsTypescript";
 import useColorScheme from "../hooks/useColorScheme";
 import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
-import NewsScreen from "../screens/NewsScreen";
+import PureBhakti from "../screens/PureBhaktiScreen";
+import ContactScreen from "../screens/ContactScreen";
+import ProductStash from "../screens/ProductStash";
 import {
   BottomTabParamList,
   TabOneParamList,
   TabTwoParamList,
   TabThreeParamList,
+  TabFourParamList,
 } from "../types";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
   const colorScheme = useColorScheme();
-
   return (
     <BottomTab.Navigator
       initialRouteName="Ekadasi"
@@ -33,23 +37,55 @@ export default function BottomTabNavigator() {
             <TabBarIcon name="md-heart" color={color} />
           ),
         }}
-      />
-      <BottomTab.Screen
-        name="Resources"
-        component={TabTwoNavigator}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="md-book" color={color} />
-          ),
+        listeners={{
+          tabPress: e => {
+            Haptics.selectionAsync();
+
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          },
         }}
       />
       <BottomTab.Screen
-        name="All"
+        name="PureBhakti"
+        component={TabTwoNavigator}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="md-moon-outline" color={color} />
+          ),
+        }}
+        listeners={{
+          tabPress: e => {
+            Haptics.selectionAsync();
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="Contact"
         component={TabThreeNavigator}
         options={{
           tabBarIcon: ({ color }) => (
-            <TabBarIcon name="md-calendar" color={color} />
+            <TabBarIcon name="md-mail-outline" color={color} />
           ),
+        }}
+        listeners={{
+          tabPress: e => {
+            Haptics.selectionAsync();
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          },
+        }}
+      />
+      <BottomTab.Screen
+        name="RoadMap"
+        component={TabFourNavigator}
+        options={{
+          tabBarIcon: ({ color }) => <TabBarIcon name="md-map" color={color} />,
+        }}
+        listeners={{
+          tabPress: e => {
+            Haptics.selectionAsync();
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          },
         }}
       />
     </BottomTab.Navigator>
@@ -62,7 +98,54 @@ function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
   color: string;
 }) {
-  return <Ionicons size={30} style={{ marginBottom: -3 }} {...props} />;
+  // if oreintation === landscape then styles.landscapeScreen
+  // delete this
+  // const [getOrientation, setGetOrientation] = React.useState("");
+
+  // const getCurrentOrientation = async () => {
+  //   ScreenOrientation.getOrientationAsync().then(data => {
+  //     if (data == 1) {
+  //       setGetOrientation("portrait");
+  //     }
+  //     if (data == 3) {
+  //       setGetOrientation("landscape");
+  //     }
+  //     // return getOrientation;
+  //   });
+  // };
+
+  // React.useEffect(() => {
+  //   getCurrentOrientation();
+  // }, []);
+
+  // end delete this
+
+  // from https://github.com/expo/expo/issues/10944 and
+  // https://forums.expo.io/t/how-to-use-screenorientation-addorientationchangelistener/47921/2
+
+  const [screenOrientation, setScreenOrientation] = React.useState();
+
+  const onOrientationChange = currentOrientation => {
+    const orientationValue = currentOrientation.orientationInfo.orientation;
+    setScreenOrientation(orientationValue);
+  };
+
+  const screenOrientationListener = ScreenOrientation.addOrientationChangeListener(
+    onOrientationChange
+  );
+
+  // end from github
+
+  return (
+    <Ionicons
+      size={30}
+      // style={{ marginBottom: -3, paddingRight: 30 }}
+      style={[
+        screenOrientation === 3 ? styles.landscapeMode : styles.portraitMode,
+      ]}
+      {...props}
+    />
+  );
 }
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
@@ -87,9 +170,9 @@ function TabTwoNavigator() {
   return (
     <TabTwoStack.Navigator>
       <TabTwoStack.Screen
-        name="LinksScreen"
-        component={LinksScreen}
-        options={{ headerTitle: "Resources" }}
+        name="PureBhaktiScreen"
+        component={PureBhakti}
+        options={{ headerTitle: "Pure Bhakti Calendar" }}
       />
     </TabTwoStack.Navigator>
   );
@@ -101,86 +184,34 @@ function TabThreeNavigator() {
   return (
     <TabThreeStack.Navigator>
       <TabThreeStack.Screen
-        name="NewsScreen"
-        component={NewsScreen}
-        options={{ headerTitle: "All Ekadasi dates" }}
+        name="ContactScreen"
+        component={ContactScreen}
+        options={{ headerTitle: "Contact" }}
       />
     </TabThreeStack.Navigator>
   );
 }
 
-/*
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import * as React from "react";
-import {
-  NavigationContainer,
-  getFocusedRouteNameFromRoute,
-} from "@react-navigation/native";
+const TabFourStack = createStackNavigator<TabFourParamList>();
 
-import TabBarIcon from "../components/TabBarIcon";
-import HomeScreen from "../screens/HomeScreen";
-import LinksScreen from "../screens/LinksScreen";
-import NewsScreen from "../screens/NewsScreen";
-
-const BottomTab = createBottomTabNavigator();
-const INITIAL_ROUTE_NAME = "Ekadasi";
-
-export default function BottomTabNavigator({ navigation, route }) {
-  // Set the header title on the parent stack navigator depending on the
-  // currently active tab. Learn more in the documentation:
-  // https://reactnavigation.org/docs/en/screen-options-resolution.html
-  navigation.setOptions({ headerTitle: getHeaderTitle(route) });
-
+function TabFourNavigator() {
   return (
-    <BottomTab.Navigator initialRouteName={INITIAL_ROUTE_NAME}>
-      <BottomTab.Screen
-        name="Ekadasi"
-        component={HomeScreen}
-        options={{
-          title: "Ekadasi",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-heart" />
-          ),
-        }}
+    <TabFourStack.Navigator>
+      <TabFourStack.Screen
+        name="ProductStash"
+        component={ProductStash}
+        options={{ headerTitle: "Ideas and Roadmap" }}
       />
-      <BottomTab.Screen
-        name="Resources"
-        component={LinksScreen}
-        options={{
-          title: "Resources",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-book" />
-          ),
-        }}
-      />
-      <BottomTab.Screen
-        name="All"
-        component={NewsScreen}
-        options={{
-          title: "All",
-          tabBarIcon: ({ focused }) => (
-            <TabBarIcon focused={focused} name="md-calendar" />
-          ),
-        }}
-      />
-    </BottomTab.Navigator>
+    </TabFourStack.Navigator>
   );
 }
 
-function getHeaderTitle(route) {
-  const routeName =
-    // route.state?.routes[route.state.index]?.name ?? INITIAL_ROUTE_NAME;
-
-    getFocusedRouteNameFromRoute(route) ?? "Ekadasi";
-
-  switch (routeName) {
-    case "Ekadasi":
-      return "Ekadasi is the mother of Bhakti";
-    case "Resources":
-      return "Bhakti Resources";
-    case "All":
-      return "Ekadasi dates in 2020";
-  }
-}
-
-*/
+const styles = StyleSheet.create({
+  landscapeMode: {
+    marginBottom: -3,
+    paddingRight: 30,
+  },
+  portraitMode: {
+    marginBottom: -3,
+  },
+});
