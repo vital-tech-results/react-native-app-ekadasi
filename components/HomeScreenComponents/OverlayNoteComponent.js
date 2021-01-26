@@ -18,7 +18,12 @@ export default function OverlayNote() {
         onPress={toggleOverlay}
       />
 
-      <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
+      <Overlay
+        isVisible={visible}
+        onBackdropPress={toggleOverlay}
+        supportedOrientations={["portrait", "landscape"]}
+        animationType="fade"
+      >
         <Text style={styles.overlayBoxArea}>
           NOTE: All dates are for Vrndavana, India. For your local dates tap
           "PureBhakti" below. Configure your local time on purebhatki.com right
