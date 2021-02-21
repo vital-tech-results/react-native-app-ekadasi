@@ -12,7 +12,7 @@ export default function ListAllEkadasisThisYear() {
 
   return data.thisYear2021.map(data => {
     return (
-      <View key={data.ekadasiName}>
+      <View key={data.ekadasiName + data.monthId}>
         <Card>
           <View>
             <ListItem key={data.ekadasiName}>

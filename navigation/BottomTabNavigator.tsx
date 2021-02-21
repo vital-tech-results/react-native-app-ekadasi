@@ -99,28 +99,27 @@ function TabBarIcon(props: {
   color: string;
 }) {
   // if oreintation === landscape then styles.landscapeScreen
-  // delete this
-  // const [getOrientation, setGetOrientation] = React.useState("");
+  // get initial orientation
+  const [getOrientation, setGetOrientation] = React.useState("");
 
-  // const getCurrentOrientation = async () => {
-  //   ScreenOrientation.getOrientationAsync().then(data => {
-  //     if (data == 1) {
-  //       setGetOrientation("portrait");
-  //     }
-  //     if (data == 3) {
-  //       setGetOrientation("landscape");
-  //     }
-  //     // return getOrientation;
-  //   });
-  // };
+  const getCurrentOrientation = async () => {
+    ScreenOrientation.getOrientationAsync().then(data => {
+      if (data == 1) {
+        setGetOrientation("portrait");
+      }
+      if (data == 3) {
+        setGetOrientation("landscape");
+      }
+    });
+  };
 
-  // React.useEffect(() => {
-  //   getCurrentOrientation();
-  // }, []);
+  React.useEffect(() => {
+    getCurrentOrientation();
+  }, []);
 
-  // end delete this
+  // end get initial orientation
 
-  // from https://github.com/expo/expo/issues/10944 and
+  // listen for changes in orientation from https://github.com/expo/expo/issues/10944 and
   // https://forums.expo.io/t/how-to-use-screenorientation-addorientationchangelistener/47921/2
 
   const [screenOrientation, setScreenOrientation] = React.useState();
@@ -134,14 +133,18 @@ function TabBarIcon(props: {
     onOrientationChange
   );
 
-  // end from github
+  // end listen for changes in orientation from github
 
   return (
     <Ionicons
       size={30}
       // style={{ marginBottom: -3, paddingRight: 30 }}
       style={[
-        screenOrientation === 3 ? styles.landscapeMode : styles.portraitMode,
+        screenOrientation === undefined
+          ? styles.portraitMode
+          : screenOrientation === 1
+          ? styles.portraitMode
+          : styles.landscapeMode,
       ]}
       {...props}
     />

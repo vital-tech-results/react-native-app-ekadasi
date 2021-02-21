@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import * as ScreenOrientation from "expo-screen-orientation";
 import useCachedResources from "./hooks/useCachedResources";
