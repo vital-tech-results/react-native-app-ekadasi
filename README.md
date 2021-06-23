@@ -1,7 +1,7 @@
 # React Native App using Expo CLI
 
 - Keep track of upcoming Ekadasi dates
-- Log into (Purebhakti)[purebhakti.com] and keep your settings (no more navigating to Web site. Keep your location on your device!)
+- Log into [Purebhaki](https://www.purebhakti.com/) and keep your settings (no more navigating to Web site. Keep your location on your device!)
 
 ## Why
 
