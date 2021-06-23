@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, DynamicColorIOS } from "react-native";
+import { View, Text, DynamicColorIOS, Platform } from "react-native";
 
 export default function Loading() {
   return (
@@ -13,10 +13,13 @@ export default function Loading() {
     >
       <Text
         style={{
-          color: (customDynamicTextColor = DynamicColorIOS({
-            dark: "mintcream",
-            light: "midnightblue",
-          })),
+          color:
+            Platform.OS === "ios"
+              ? (customDynamicTextColor = DynamicColorIOS({
+                  dark: "mintcream",
+                  light: "midnightblue",
+                }))
+              : "midnightblue",
           fontSize: 24,
           fontWeight: "700",
           width: "100%",

@@ -14,5 +14,12 @@ ignore/notes.md
 assets/images/ignore-these
 assets/ignore-files
 ignore/**/*
+
+components/Notifications/ScheduleNotification-bckup-feb-2021.js
+components/Notifications/ScheduleNotifications-backup-march-20.js
+
+
 # macOS
 .DS_Store
+
+google-services-backup.json

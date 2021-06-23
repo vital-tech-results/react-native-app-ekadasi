@@ -28,7 +28,7 @@ export default function OverlayNote() {
           NOTE: All dates are for Vrndavana, India. For your local dates tap
           "PureBhakti" below. Configure your local time on purebhatki.com right
           here in this app. Every time you open this app in the future, you will
-          see your time zone in the PureBhakti tab.
+          see your time zone in the PureBhakti tab. Haribol!
         </Text>
       </Overlay>
     </View>

@@ -14,7 +14,7 @@ import schedulePushNotification from "../components/Notifications/ScheduleNotifi
 
 import ListAllEkadasisThisYear from "../components/ListAllEkadasisThisYear";
 
-schedulePushNotification();
+schedulePushNotification(); 
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

@@ -49,8 +49,8 @@ export const thisYear2021 = [
   {
     ekadasiName: "Amalaki",
     monthName: "March",
-    dayInMonth: "23",
-    dayOfWeek: "Tuesday",
+    dayInMonth: "25",
+    dayOfWeek: "Thursday",
     monthId: "2",
     aboutThisEkadasi: "",
     breakFastTime: "",
