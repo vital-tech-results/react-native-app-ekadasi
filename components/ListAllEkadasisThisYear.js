@@ -1,5 +1,5 @@
 import * as React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, useColorScheme } from "react-native";
 import { Card, ListItem } from "react-native-elements";
 
 import * as data from "../data/data-array-2021";
@@ -10,14 +10,24 @@ export default function ListAllEkadasisThisYear() {
   let dayOfMonth = new Date().getDate();
   const today = year + " " + month + " " + dayOfMonth;
 
+  const colorScheme = useColorScheme();
+
+  const listContainerStyle =
+    colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
+  const listTextStyle =
+    colorScheme === "light" ? styles.getStartedText : styles.getStartedTextDark;
+
   return data.thisYear2021.map(data => {
     return (
       <View key={data.ekadasiName + data.monthId}>
-        <Card>
+        <Card containerStyle={(styles.lightContainer, listContainerStyle)}>
           <View>
-            <ListItem key={data.ekadasiName}>
+            <ListItem
+              key={data.ekadasiName}
+              containerStyle={(styles.lightContainer, listContainerStyle)}
+            >
               <ListItem.Content>
-                <ListItem.Title style={styles.getStartedText}>
+                <ListItem.Title style={(styles.getStartedText, listTextStyle)}>
                   {data.dayOfWeek}, {data.monthName} {data.dayInMonth}
                 </ListItem.Title>
               </ListItem.Content>
@@ -37,5 +47,20 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     textAlign: "center",
     fontWeight: "bold",
+  },
+  getStartedTextDark: {
+    fontSize: 17,
+    alignSelf: "center",
+    color: "#fff",
+    lineHeight: 24,
+    textAlign: "center",
+    fontWeight: "bold",
+  },
+
+  lightContainer: {
+    backgroundColor: "#d0d0c0",
+  },
+  darkContainer: {
+    backgroundColor: "#242c40",
   },
 });

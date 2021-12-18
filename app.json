@@ -6,7 +6,7 @@
     "privacy": "public",
     "githubUrl": "https://github.com/dominick-designs/react-native-app-ekadasi",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.13",
+    "version": "0.0.14",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -22,7 +22,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.12",
+      "buildNumber": "0.0.13",
       "supportsTablet": true,
       "requireFullScreen": true,
       "appStoreUrl": "https://apps.apple.com/us/app/next-ekadasi/id1517935088",
@@ -36,7 +36,7 @@
       "useNextNotificationsApi": true,
       "permissions": [],
       "googleServicesFile": "./google-services.json",
-      "versionCode": 14
+      "versionCode": 15
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

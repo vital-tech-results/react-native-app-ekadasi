@@ -1,5 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Image, Platform, StyleSheet, View, Text } from "react-native";
+import {
+  Image,
+  Platform,
+  StyleSheet,
+  View,
+  Text,
+  Appearance,
+  useColorScheme,
+} from "react-native";
+
 import { Card, Divider } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
 import Constants from "expo-constants";
@@ -10,11 +19,21 @@ import { BlurView } from "expo-blur";
 
 import OverlayNote from "../components/HomeScreenComponents/OverlayNoteComponent";
 import GetAll from "../components/HomeScreenComponents/DisplayNextEkadasiComponent";
-import schedulePushNotification from "../components/Notifications/ScheduleNotifications";
-
 import ListAllEkadasisThisYear from "../components/ListAllEkadasisThisYear";
 
-schedulePushNotification(); 
+import schedulePushNotification from "../components/Notifications/ScheduleNotifications";
+import schedulePushNotificationAndroid from "../components/Notifications/ScheduleNotificationsAndroid";
+
+import * as Device from "expo-device";
+
+// see if device is android or ios
+// if ios run this notification otherwise run this notif....
+Device.osName === "iOS"
+  ? schedulePushNotification()
+  : schedulePushNotificationAndroid();
+
+// schedulePushNotification();
+// schedulePushNotificationAndroid();
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -31,6 +50,17 @@ Notifications.setNotificationHandler({
 });
 
 export default function HomeScreen() {
+  const colorScheme = useColorScheme();
+
+  const themeTextStyle =
+    colorScheme === "light" ? styles.lightThemeText : styles.darkThemeText;
+  const themeContainerStyle =
+    colorScheme === "light" ? styles.lightContainer : styles.darkContainer;
+  const tabBarInfoContainerStyle =
+    colorScheme === "light"
+      ? styles.tabBarInfoContainer
+      : styles.tabBarInfoContainerDark;
+
   const [expoPushToken, setExpoPushToken] = useState("");
   const [notification, setNotification] = useState(false);
   const notificationListener = useRef();
@@ -44,17 +74,15 @@ export default function HomeScreen() {
   useEffect(() => {
     registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
-    notificationListener.current = Notifications.addNotificationReceivedListener(
-      notification => {
+    notificationListener.current =
+      Notifications.addNotificationReceivedListener(notification => {
         setNotification(notification);
-      }
-    );
+      });
 
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(
-      response => {
+    responseListener.current =
+      Notifications.addNotificationResponseReceivedListener(response => {
         Notifications.setBadgeCountAsync(0);
-      }
-    );
+      });
 
     return () => {
       Notifications.removeNotificationSubscription(notificationListener);
@@ -65,7 +93,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.container}>
       <ScrollView
-        style={styles.container}
+        style={(styles.container, themeContainerStyle)}
         contentContainerStyle={styles.contentContainer}
       >
         <View style={styles.welcomeContainer}>
@@ -92,7 +120,7 @@ export default function HomeScreen() {
           }}
         />
         <BlurView intensity={10} tint="dark">
-          <Text style={styles.getStartedText}>
+          <Text style={(styles.getStartedText, themeTextStyle)}>
             Scroll to view list of all Ekadasi dates for 2021 (Vrndavana time
             zone). To view Ekadasi dates for your local time zone, tap the
             "PureBhakti" tab below and configure your time zone there.
@@ -101,7 +129,7 @@ export default function HomeScreen() {
 
         <ListAllEkadasisThisYear />
       </ScrollView>
-      <View style={styles.tabBarInfoContainer}>
+      <View style={(styles.tabBarInfoContainer, tabBarInfoContainerStyle)}>
         <OverlayNote />
       </View>
     </View>
@@ -115,9 +143,8 @@ HomeScreen.navigationOptions = {
 async function registerForPushNotificationsAsync() {
   let token;
   if (Constants.isDevice) {
-    const {
-      status: existingStatus,
-    } = await Notifications.getPermissionsAsync();
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
     if (existingStatus !== "granted") {
       const { status } = await Notifications.requestPermissionsAsync();
@@ -164,6 +191,7 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     paddingBottom: 150,
   },
+
   welcomeContainer: {
     alignItems: "center",
     marginTop: 10,
@@ -206,5 +234,46 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fbfbfb",
     paddingVertical: 20,
+  },
+  tabBarInfoContainerDark: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    ...Platform.select({
+      ios: {
+        shadowColor: "black",
+        shadowOffset: { width: 0, height: -3 },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+      },
+      android: {
+        elevation: 20,
+      },
+    }),
+    alignItems: "center",
+    backgroundColor: "#242c40",
+    paddingVertical: 20,
+  },
+
+  lightContainer: {
+    backgroundColor: "#fff",
+  },
+  darkContainer: {
+    backgroundColor: "#242c40",
+  },
+  lightThemeText: {
+    color: "#242c40",
+    fontSize: 17,
+    lineHeight: 24,
+    textAlign: "left",
+    padding: 30,
+  },
+  darkThemeText: {
+    color: "#d0d0c0",
+    fontSize: 17,
+    lineHeight: 24,
+    textAlign: "left",
+    padding: 30,
   },
 });
