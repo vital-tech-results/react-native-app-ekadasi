@@ -1,5 +1,5 @@
 {
-  "main": "./App.tsx",
+  "main": "./index.js",
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
-    "@react-native-community/masked-view": "0.1.10",
-    "@react-navigation/bottom-tabs": "^5.11.2",
+    "@react-native-community/masked-view": "^0.1.11",
+    "@react-navigation/bottom-tabs": "^6.0.9",
     "@react-navigation/native": "^5.8.10",
-    "@react-navigation/stack": "^5.12.8",
+    "@react-navigation/stack": "^6.0.11",
     "expo": "^44.0.0",
     "expo-asset": "~8.4.5",
     "expo-background-fetch": "~10.1.0",
@@ -55,7 +55,7 @@
     "@types/react-native": "~0.64.12",
     "babel-preset-expo": "9.0.1",
     "gh-pages": "^3.2.3",
-    "jest-expo": "^44.0.0",
+    "jest-expo": "^44.0.1",
     "typescript": "~4.3.5"
   },
   "private": true,
