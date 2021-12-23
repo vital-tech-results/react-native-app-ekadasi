@@ -1,13 +1,27 @@
 {
-  "builds": {
-    "android": {
-      "release": {
-        "workflow": "managed"
-      }
+  "cli": {
+    "version": ">= 0.41.1"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
     },
-    "ios": {
-      "release": {
-        "workflow": "managed"
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "./assets/ignore-files/google-play-store/essential-json-for-app/api-9108300582981119040-694684-60af21356756.json",
+        "track": "internal"
+      },
+      "ios": {
+        "appleId": "dominick@dominickdesigns.space",
+        "ascAppId": "1517935088",
+        "appleTeamId": "W5U8JYB7X3"
       }
     }
   }

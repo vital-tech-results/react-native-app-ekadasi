@@ -2,7 +2,7 @@ import * as React from "react";
 import { View, StyleSheet, useColorScheme } from "react-native";
 import { Card, ListItem } from "react-native-elements";
 
-import * as data from "../data/data-array-2021";
+import * as data from "../data/data-array-2022";
 
 export default function ListAllEkadasisThisYear() {
   let year = new Date().getFullYear();
@@ -17,7 +17,7 @@ export default function ListAllEkadasisThisYear() {
   const listTextStyle =
     colorScheme === "light" ? styles.getStartedText : styles.getStartedTextDark;
 
-  return data.thisYear2021.map(data => {
+  return data.thisYear2022.map(data => {
     return (
       <View key={data.ekadasiName + data.monthId}>
         <Card containerStyle={(styles.lightContainer, listContainerStyle)}>

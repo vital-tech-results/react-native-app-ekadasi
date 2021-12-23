@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Platform, StyleSheet } from "react-native";
-import { thisYear2021 } from "../../data/data-array-2021";
+import { thisYear2022 } from "../../data/data-array-2022";
 
-import NextEkadasiIs from "./DisplayTextOfNextEkadasi";
-import TodayOrTomorowIsEkadasi from "./TodayOrTomorrowIsEkadasi";
+import NextEkadasiIs from "./NextEkadasiIs";
+import TomorowIsEkadasi from "./TomorrowIsEkadasi";
+import TodayIsEkadasi from "./TodayIsEkadasi";
 
-class GetAll extends Component {
+class DisplayNextEkadasi extends Component {
   state = {
     visible: true,
     month: new Date().getMonth(),
@@ -20,12 +21,17 @@ class GetAll extends Component {
   render() {
     const { month, dayOfMonth, dayOfMonthPlusOne } = this.state;
 
-    return thisYear2021
+    return thisYear2022
       .filter(data => {
         if (Number(data.monthId) === month && data.dayInMonth >= dayOfMonth) {
           return data;
         } else if (
           Number(data.monthId) === month + 1 &&
+          data.dayInMonth < dayOfMonth + 14
+        ) {
+          return data;
+        } else if (
+          Number(data.monthId) === 0 &&
           data.dayInMonth < dayOfMonth + 14
         ) {
           return data;
@@ -37,7 +43,7 @@ class GetAll extends Component {
 
         if (monthIdEqualsMonth && dataDayInMonth === dayOfMonth) {
           return (
-            <TodayOrTomorowIsEkadasi
+            <TodayIsEkadasi
               key={index}
               buttonStyle={{ backgroundColor: "#15c240" }}
               containerStyle={{ marginBottom: 20 }}
@@ -50,6 +56,7 @@ class GetAll extends Component {
               monthName={data.monthName}
               dayInMonth={data.dayInMonth}
               ekadasiName={data.ekadasiName}
+              breakFastTime={data.breakFastTime}
               style={styles.displayEkadasi}
             />
           );
@@ -61,7 +68,7 @@ class GetAll extends Component {
           index === 0
         ) {
           return (
-            <TodayOrTomorowIsEkadasi
+            <TomorowIsEkadasi
               key={index}
               buttonStyle={{ backgroundColor: "#f7ebc4" }}
               onPress={this.toggleOverlay}
@@ -112,7 +119,7 @@ class GetAll extends Component {
   }
 }
 
-export default GetAll;
+export default DisplayNextEkadasi;
 
 const styles = StyleSheet.create({
   overlayBoxArea: {

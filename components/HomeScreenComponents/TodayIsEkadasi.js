@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { Button, Text } from "react-native-elements";
 import EkadasiOverlay from "./AboutEkadasiTextOverlay";
 
-export default function TodayOrTomorowIsEkadasi({
+export default function TodayIsEkadasi({
   index,
   buttonStyle,
   containerStyle,
@@ -15,6 +15,7 @@ export default function TodayOrTomorowIsEkadasi({
   dayInMonth,
   ekadasiName,
   isVisible,
+  breakFastTime,
   style,
 }) {
   return (
@@ -33,6 +34,10 @@ export default function TodayOrTomorowIsEkadasi({
         <Text style={style}>
           {dayOfWeek}, {monthName} {dayInMonth}: {ekadasiName}
         </Text>
+        <Text style={{ marginTop: "5%", fontSize: 15 }}>
+          Break fast tomorrow between (parana)
+        </Text>
+        <Text style={{ fontSize: 24 }}>{breakFastTime}</Text>
       </View>
     </>
   );

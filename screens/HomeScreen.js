@@ -17,8 +17,8 @@ import * as Permissions from "expo-permissions";
 
 import { BlurView } from "expo-blur";
 
-import OverlayNote from "../components/HomeScreenComponents/OverlayNoteComponent";
-import GetAll from "../components/HomeScreenComponents/DisplayNextEkadasiComponent";
+import OverlayNote from "../components/HomeScreenComponents/OverlayNote";
+import DisplayNextEkadasi from "../components/HomeScreenComponents/DisplayNextEkadasi";
 import ListAllEkadasisThisYear from "../components/ListAllEkadasisThisYear";
 
 import schedulePushNotification from "../components/Notifications/ScheduleNotifications";
@@ -109,7 +109,7 @@ export default function HomeScreen() {
         >
           <Card.Title>The Next Ekadasi is...</Card.Title>
           <Card.Divider />
-          <GetAll />
+          <DisplayNextEkadasi />
         </Card>
         <Divider
           style={{
