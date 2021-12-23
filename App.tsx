@@ -1,3 +1,5 @@
+import { registerRootComponent } from "expo";
+
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -29,3 +31,5 @@ export default function App() {
     );
   }
 }
+
+registerRootComponent(App);

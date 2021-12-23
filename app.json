@@ -1,12 +1,13 @@
 {
   "expo": {
+    "entryPoint": "./App.tsx",
     "name": "ekadasi",
     "description": "Keep track of upcoming Ekadasi dates.",
     "slug": "ekadasi",
     "privacy": "public",
     "githubUrl": "https://github.com/dominick-designs/react-native-app-ekadasi",
     "platforms": ["ios", "android", "web"],
-    "version": "0.0.15",
+    "version": "0.0.17",
     "orientation": "default",
     "icon": "./assets/images/icon.png",
     "scheme": "ekadasi",
@@ -23,7 +24,7 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "bundleIdentifier": "com.dominickdesigns.ekadasi",
-      "buildNumber": "0.0.14",
+      "buildNumber": "0.0.16",
       "supportsTablet": true,
       "requireFullScreen": true,
       "appStoreUrl": "https://apps.apple.com/us/app/next-ekadasi/id1517935088",
@@ -37,7 +38,7 @@
       "useNextNotificationsApi": true,
       "permissions": [],
       "googleServicesFile": "./google-services.json",
-      "versionCode": 16
+      "versionCode": 18
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
